@@ -20,9 +20,5 @@
   [headers.values]
     Cache-Control = "public, max-age=604800"
 
-# planovabv.nl zonder www doorsturen naar www
-[[redirects]]
-  from = "https://planovabv.nl/*"
-  to = "https://www.planovabv.nl/:splat"
-  status = 301
-  force = true
+# Doorverwijzing tussen planovabv.nl en www.planovabv.nl regelt Netlify zelf
+# via het primaire domein (Domain management). Hier geen redirect toevoegen.
