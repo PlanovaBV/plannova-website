@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PlanNova Projectontwikkeling</title>
+<meta name="description" content="PlanNova ontwikkelt woningbouwprojecten met slimme inzet van AI: snel inzicht in wat een locatie kan worden, onderbouwde keuzes en persoonlijk contact.">
+<meta name="theme-color" content="#03241E">
+<link rel="canonical" href="https://www.planovabv.nl/">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="assets/favicon-48.png" sizes="48x48">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="nl_NL">
+<meta property="og:site_name" content="PlanNova">
+<meta property="og:title" content="PlanNova Projectontwikkeling">
+<meta property="og:description" content="Van kavel tot voordeur, slimmer ontwikkeld. Projectontwikkeling in de woningbouw met slimme inzet van AI.">
+<meta property="og:url" content="https://www.planovabv.nl/">
+<meta property="og:image" content="https://www.planovabv.nl/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="assets/fonts/urbanist-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+html,body{margin:0}
+
+@font-face{font-family:"Urbanist";font-style:normal;font-weight:500;font-display:swap;src:url("assets/fonts/urbanist-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Urbanist";font-style:normal;font-weight:600;font-display:swap;src:url("assets/fonts/urbanist-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Urbanist";font-style:normal;font-weight:700;font-display:swap;src:url("assets/fonts/urbanist-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Public Sans";font-style:normal;font-weight:400;font-display:swap;src:url("assets/fonts/public-sans-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Public Sans";font-style:normal;font-weight:500;font-display:swap;src:url("assets/fonts/public-sans-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Public Sans";font-style:normal;font-weight:600;font-display:swap;src:url("assets/fonts/public-sans-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url("assets/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url("assets/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2")}
+/* Layout: wide editorial grid; hero pairs statement with a site-plan drawing, then audience doors, process, thesis band, founders, contact. Single committed brand look (light sand + deep green). */
+:root{
+  --green:#03241E; --green-2:#0B3A31; --green-3:#164b40;
+  --gold:#C5A45F; --gold-deep:#8E7337;
+  --sand:#EDE6D6; --sand-2:#E2D8C2; --paper:#F6F3EC;
+  --ink:#03241E; --muted:#4F6560; --line:#D6CCB4;
+  --on-green:#EDE6D6; --on-green-muted:#A9B8AE;
+  --display:"Urbanist","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --body:"Public Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --wrap:1180px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{overflow-anchor:none;background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:clamp(16px,4vw,40px)}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.08;letter-spacing:-.015em;margin:0;text-wrap:balance}
+p{margin:0}
+.eyebrow{font:500 12px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep)}
+.on-green .eyebrow{color:var(--gold)}
+
+/* Header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:14px}
+.brand img{height:38px;width:auto;display:block}
+.nav{display:flex;gap:28px;align-items:center}
+.nav a{text-decoration:none;font:500 15px/1 var(--body);color:var(--muted);transition:color .15s}
+.nav a:hover{color:var(--ink)}
+.nav .btn-sm{color:var(--paper);background:var(--green);padding:11px 18px;border-radius:2px}
+.nav .btn-sm:hover{color:var(--paper);background:var(--green-3)}
+.menu{display:none}
+.menu summary{list-style:none;cursor:pointer;font:500 14px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:10px 0}
+.menu summary::-webkit-details-marker{display:none}
+.menu[open] .drop{display:flex}
+.drop{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;background:var(--paper);border-bottom:1px solid var(--line);padding:8px clamp(16px,4vw,40px) 20px}
+.drop a{padding:12px 0;border-bottom:1px solid var(--line);text-decoration:none;font-weight:500}
+@media (max-width:900px){.nav{display:none}.menu{display:block}.brand img{height:32px}}
+
+/* Hero */
+.hero{padding-block:clamp(48px,8vw,96px) clamp(56px,8vw,104px)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(32px,5vw,72px);align-items:center}
+.hero h1{font-size:clamp(42px,6.2vw,80px);font-weight:600;margin-top:20px}
+.hero h1 em{font-style:normal;color:var(--gold-deep)}
+.lede{margin-top:24px;font-size:clamp(17px,1.5vw,19px);color:var(--muted);max-width:34em}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:600 15px/1 var(--body);padding:16px 22px;border-radius:2px;border:1px solid var(--green);transition:background .15s,color .15s}
+.btn.primary{background:var(--green);color:var(--paper)}
+.btn.primary:hover{background:var(--green-3);border-color:var(--green-3)}
+.btn.ghost{color:var(--green)}
+.btn.ghost:hover{background:var(--sand)}
+.btn .arr{transition:transform .2s}
+.btn:hover .arr{transform:translateX(3px)}
+.plan{background:var(--green);border-radius:3px;padding:clamp(16px,2.4vw,28px);position:relative;min-width:0}
+.plan svg{display:block;width:100%;height:auto}
+.plan-cap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px;font:400 12px/1.4 var(--mono);color:var(--on-green-muted);letter-spacing:.04em}
+.plan-cap b{color:var(--gold);font-weight:500}
+.kavel{fill:transparent;stroke:#EDE6D6;stroke-width:1.2;transition:fill .25s}
+.kavel:hover,.kavel.hl{fill:rgba(197,164,95,.22)}
+.bv{fill:none;stroke:#C5A45F;stroke-width:1;stroke-dasharray:4 3}
+.lbl{font:500 10px var(--mono);fill:#EDE6D6;letter-spacing:.04em}
+.lbl-s{font:400 8.5px var(--mono);fill:#A9B8AE}
+@keyframes draw{from{stroke-dashoffset:1400}to{stroke-dashoffset:0}}
+.grens{fill:none;stroke:#C5A45F;stroke-width:2;stroke-dasharray:1400;animation:draw 1.8s .2s ease-out both}
+.hero .wrap{grid-template-columns:1fr}
+.hero h1{max-width:13em}
+.cue{margin-top:56px;font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;align-items:center}
+.cue span{display:inline-block;animation:bob 1.8s ease-in-out infinite;color:var(--gold-deep)}
+@keyframes bob{50%{transform:translateY(5px)}}
+
+/* Scroll story: pinned stage, plot grows into a project */
+.groei{position:relative;height:480vh;background:var(--green);color:var(--on-green)}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.stage .wrap{height:100%;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr);gap:clamp(24px,4vw,56px);align-items:center;padding-block:88px 32px}
+.story{display:flex;flex-direction:column;gap:18px;min-width:0}
+.phases{list-style:none;margin:0 0 8px;padding:0;display:flex;gap:6px}
+.phases li{flex:1;height:3px;background:var(--green-3);position:relative;overflow:hidden}
+.phases li b{position:absolute;inset:0;background:var(--gold);transform-origin:left;transform:scaleX(0)}
+.ph-name{font:600 clamp(34px,4vw,54px)/1.05 var(--display);letter-spacing:-.015em;color:var(--on-green);min-height:1.1em}
+.ph-text{color:var(--on-green-muted);font-size:clamp(16px,1.4vw,18px);max-width:28em;min-height:5.2em}
+.readout{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--green-3);border:1px solid var(--green-3);margin-top:8px}
+.readout div{background:var(--green);padding:14px 16px}
+.readout dt{font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--on-green-muted)}
+.readout dd{margin:8px 0 0;font:600 30px/1 var(--display);color:var(--gold);font-variant-numeric:tabular-nums}
+.readout dd small{font:400 14px var(--mono);color:var(--on-green-muted)}
+.cv-box{position:relative;height:min(76svh,720px);min-width:0}
+#groei-cv{position:absolute;inset:0;width:100%;height:100%;display:block}
+@media (max-width:860px){
+  .stage .wrap{grid-template-columns:1fr;grid-template-rows:1fr auto;align-items:stretch;padding-block:72px 24px;gap:12px}
+  .cv-box{height:auto;min-height:0;order:-1}
+  .ph-name{font-size:30px}.ph-text{min-height:4.8em;font-size:15px}
+  .readout dd{font-size:24px}
+  .story{gap:10px}
+}
+
+.skip{align-self:flex-start;margin-top:6px;display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--on-green);border:1px solid var(--green-3);border-radius:2px;padding:12px 16px;font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:border-color .15s,color .15s,opacity .3s}
+.skip:hover{border-color:var(--gold);color:var(--gold)}
+.skip.gone{opacity:0;pointer-events:none}
+.cue a{color:var(--gold-deep);text-underline-offset:3px;letter-spacing:.12em}
+@media (max-width:860px){.skip{padding:10px 14px}}
+@media (prefers-reduced-motion:reduce){.skip{display:none}.groei{height:auto}.stage{position:relative;height:auto}.stage .wrap{padding-block:64px}.cv-box{height:60vh}}
+
+/* Doors */
+.doors{padding-block:clamp(64px,8vw,104px);border-top:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(20px,4vw,64px);align-items:end;margin-bottom:clamp(36px,5vw,56px)}
+.sec-head h2{font-size:clamp(32px,4vw,50px);margin-top:14px}
+.sec-head p{color:var(--muted);max-width:36em}
+@media (max-width:800px){.sec-head{grid-template-columns:1fr}}
+.door-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--green)}
+.door{padding:32px 32px 36px 0;display:flex;flex-direction:column;gap:14px;min-width:0}
+.door+.door{padding-left:32px;border-left:1px solid var(--line)}
+.door .tag{font:500 12px/1 var(--mono);color:var(--gold-deep);letter-spacing:.1em;text-transform:uppercase}
+.door h3{font-size:clamp(24px,2.4vw,30px)}
+.door p{color:var(--muted)}
+.door a{margin-top:auto;padding-top:10px;font-weight:600;text-decoration:none;display:inline-flex;gap:8px;border-bottom:1px solid var(--gold);align-self:flex-start;padding-bottom:3px}
+.door a:hover{color:var(--gold-deep)}
+@media (max-width:860px){.door-grid{grid-template-columns:1fr}.door,.door+.door{padding:28px 0;border-left:0;border-bottom:1px solid var(--line)}}
+
+/* Process */
+.process{background:var(--sand);padding-block:clamp(64px,8vw,104px)}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s}
+.step{padding:28px 26px 30px;border-left:1px solid var(--sand-2);display:flex;flex-direction:column;gap:12px;min-width:0;counter-increment:s}
+.step:first-child{border-left:0;padding-left:0}
+.step .n{font:500 13px/1 var(--mono);color:var(--gold-deep)}
+.step .n::before{content:"Fase " counter(s)}
+.step h3{font-size:24px}
+.step p{color:var(--muted);font-size:16px}
+.ai{margin-top:auto;padding-top:14px;border-top:1px dashed var(--line);font-size:14.5px;line-height:1.55;color:var(--ink)}
+.ai b{display:block;font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:8px}
+@media (max-width:1000px){.steps{grid-template-columns:repeat(2,1fr)}.step:nth-child(3){border-left:0;padding-left:0}.step{padding-bottom:40px}}
+@media (max-width:600px){.steps{grid-template-columns:1fr}.step{border-left:0;padding-left:0;border-top:1px solid var(--sand-2)}}
+
+/* Thesis band */
+.thesis{background:var(--green);color:var(--on-green);padding-block:clamp(72px,9vw,120px);overflow:hidden;position:relative}
+.thesis .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(36px,6vw,96px);align-items:start;position:relative}
+.thesis h2{font-size:clamp(40px,6vw,76px);font-weight:600;margin-top:18px}
+.thesis h2 span{color:var(--gold)}
+.thesis .icon-bg{position:absolute;right:-60px;bottom:-80px;width:360px;opacity:.06;pointer-events:none}
+.points{display:grid;gap:28px;padding-top:12px}
+.point{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start}
+.point i{width:10px;height:10px;background:var(--gold);transform:rotate(45deg) translateY(8px);display:block}
+.point h3{font-size:21px;color:var(--on-green)}
+.point p{color:var(--on-green-muted);font-size:16px;margin-top:6px}
+@media (max-width:860px){.thesis .wrap{grid-template-columns:1fr}}
+
+/* About */
+.about{padding-block:clamp(64px,8vw,104px)}
+.about .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,96px);align-items:start}
+.about h2{font-size:clamp(32px,4vw,50px);margin-top:14px}
+.about .copy p{color:var(--muted);margin-top:18px;max-width:34em}
+.founders{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.founder{border-top:2px solid var(--green);padding-top:20px;display:flex;flex-direction:column;gap:6px}
+.mono-init{width:72px;height:72px;background:var(--sand);display:grid;place-items:center;font:600 28px/1 var(--display);color:var(--green);margin-bottom:12px}
+.founder h3{font-size:24px}
+.founder span{font:400 13px/1.4 var(--mono);color:var(--muted)}
+@media (max-width:800px){.about .wrap{grid-template-columns:1fr}}
+
+/* Contact */
+.contact{background:var(--sand);padding-block:clamp(56px,7vw,88px)}
+.contact .wrap{display:flex;justify-content:space-between;align-items:end;gap:32px;flex-wrap:wrap}
+.contact h2{font-size:clamp(30px,3.6vw,46px);max-width:14em;margin-top:14px}
+.contact dl{display:grid;grid-template-columns:auto 1fr;gap:10px 28px;margin:0;font-size:16px}
+.contact dt{font:500 12px/1.9 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gold-deep)}
+.contact dd{margin:0;color:var(--muted)}
+
+/* Footer */
+footer{background:var(--green);color:var(--on-green-muted);padding-block:44px;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+footer img{height:34px;width:auto;display:block}
+footer .legal{font:400 12.5px/1.6 var(--mono)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="PlanNova, naar boven"><img src="assets/logo-dark.png" alt="PlanNova BV Projectontwikkeling" width="900" height="193"></a>
+    <nav class="nav" aria-label="Hoofdmenu">
+      <a href="#werkwijze">Werkwijze</a>
+      <a href="#voor-wie">Voor wie</a>
+      <a href="#over-ons">Over ons</a>
+      <a class="btn-sm" href="#contact">Contact</a>
+    </nav>
+    <details class="menu">
+      <summary aria-label="Menu openen">Menu</summary>
+      <div class="drop">
+        <a href="#werkwijze">Werkwijze</a>
+        <a href="#voor-wie">Voor wie</a>
+        <a href="#over-ons">Over ons</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </details>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Projectontwikkeling · Woningbouw</p>
+        <h1>Van kavel tot voordeur, <em>slimmer ontwikkeld.</em></h1>
+        <p class="lede">PlanNova ontwikkelt woningbouwprojecten. Met AI rekenen we verkavelingen, bouwkosten en opbrengsten snel en grondig door. Zo maken we betere keuzes, eerder in het proces, en komen er sneller goede woningen bij.</p>
+        <div class="ctas">
+          <a class="btn primary" href="#werkwijze">Bekijk onze werkwijze <span class="arr" aria-hidden="true">→</span></a>
+          <a class="btn ghost" href="#contact">Neem contact op</a>
+        </div>
+        <p class="cue" id="cue-on">Scroll en zie hoe een kavel een project wordt <span aria-hidden="true">↓</span> <a href="#voor-wie" class="skip-link">of sla over</a></p>
+        <p class="cue" id="cue-off" hidden><a href="#groei" id="replay">Animatie opnieuw bekijken</a></p>
+      </div>
+      
+    </div>
+  </section>
+  <section class="groei on-green" id="groei" aria-label="Van kavel tot project">
+    <div class="stage">
+      <div class="wrap">
+        <div class="story">
+          <p class="eyebrow">Van kavel tot project</p>
+          <ol class="phases" aria-hidden="true"><li><b></b></li><li><b></b></li><li><b></b></li><li><b></b></li><li><b></b></li></ol>
+          <h2 class="ph-name" id="ph-name">Kavel</h2>
+          <p class="ph-text" id="ph-text">Een stuk grond van 1.120 m². De vraag is altijd dezelfde: wat kan hier het beste komen?</p>
+          <dl class="readout">
+            <div><dt id="ro1-l">Oppervlakte</dt><dd id="ro1">1.120 <small>m²</small></dd></div>
+            <div><dt id="ro2-l">Woningen</dt><dd id="ro2">0</dd></div>
+          </dl>
+          <button type="button" class="skip" id="skip">Animatie overslaan <span aria-hidden="true">↓</span></button>
+        </div>
+        <div class="cv-box"><canvas id="groei-cv" role="img" aria-label="Animatie: een lege kavel wordt een appartementencomplex met 24 appartementen en 3 eengezinswoningen"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="doors" id="voor-wie">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Voor wie</p>
+          <h2>Eén project, drie partijen die het laten slagen.</h2>
+        </div>
+        <p>Een goed woningbouwproject begint bij grond, wordt mogelijk gemaakt door kapitaal en is pas geslaagd als er mensen met plezier wonen. Wij brengen die drie samen.</p>
+      </div>
+      <div class="door-grid">
+        <article class="door">
+          <span class="tag">Grondeigenaren</span>
+          <h3>U heeft grond of een pand met potentie.</h3>
+          <p>Wij laten snel zien wat er op uw locatie mogelijk is, wat het kan opleveren en welke route het meest kansrijk is. Helder onderbouwd, zodat u een goede beslissing kunt nemen.</p>
+          <a href="#contact">Locatie bespreken <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="door">
+          <span class="tag">Investeerders</span>
+          <h3>Projecten met cijfers die kloppen.</h3>
+          <p>Elk scenario doorgerekend, elk risico in beeld. U investeert in woningbouw met een transparante onderbouwing en korte lijnen met de ontwikkelaars.</p>
+          <a href="#contact">Kennismaken <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="door">
+          <span class="tag">Woningzoekers</span>
+          <h3>Goed doordachte woningen op de juiste plek.</h3>
+          <p>We ontwikkelen woningen waar vraag naar is, met aandacht voor indeling, duurzaamheid en betaalbaarheid. Onze eerste projecten staan binnenkort op deze site.</p>
+          <a href="#contact">Op de hoogte blijven <span aria-hidden="true">→</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="process" id="werkwijze">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Werkwijze</p>
+          <h2>Vier fasen, in elke fase sneller inzicht.</h2>
+        </div>
+        <p>We volgen de vertrouwde route van projectontwikkeling. Het verschil zit in hoe we elke fase onderbouwen: AI doet het rekenwerk en het speurwerk, wij nemen de beslissingen en onderhouden het contact.</p>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <span class="n"></span>
+          <h3>Locatieonderzoek</h3>
+          <p>Wat mag er volgens het omgevingsplan, hoe ligt de locatie en wat vraagt de markt in de omgeving?</p>
+          <p class="ai"><b>Waar AI helpt</b>Doorzoekt omgevingsplannen, kaartlagen en marktdata op kansen en beperkingen.</p>
+        </li>
+        <li class="step">
+          <span class="n"></span>
+          <h3>Haalbaarheid</h3>
+          <p>Welke invulling past het best? We maken varianten en een sluitend rekenmodel.</p>
+          <p class="ai"><b>Waar AI helpt</b>Genereert en vergelijkt verkavelingsvarianten op aantal woningen, kosten en opbrengst.</p>
+        </li>
+        <li class="step">
+          <span class="n"></span>
+          <h3>Planvorming</h3>
+          <p>Ontwerp uitwerken, afstemmen met gemeente en omgeving, vergunning aanvragen.</p>
+          <p class="ai"><b>Waar AI helpt</b>Helpt dossiers en onderbouwingen sneller en completer op te stellen.</p>
+        </li>
+        <li class="step">
+          <span class="n"></span>
+          <h3>Bouw en oplevering</h3>
+          <p>Aanbesteden, bouwen, verkopen of verhuren, en opleveren aan de nieuwe bewoners.</p>
+          <p class="ai"><b>Waar AI helpt</b>Bewaakt planning en budget en signaleert afwijkingen vroeg.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="thesis on-green">
+    <img class="icon-bg" src="assets/icon-light.png" alt="" width="120" height="112">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Onze aanpak</p>
+        <h2>AI rekent.<br><span>Mensen beslissen.</span></h2>
+      </div>
+      <div class="points">
+        <div class="point"><i aria-hidden="true"></i><div><h3>Sneller inzicht</h3><p>Waar een haalbaarheidsstudie normaal weken duurt, hebben wij snel een eerste beeld van wat een locatie kan worden.</p></div></div>
+        <div class="point"><i aria-hidden="true"></i><div><h3>Onderbouwde keuzes</h3><p>We vergelijken veel meer varianten dan met de hand mogelijk is, en laten zien waarom we voor de ene kiezen.</p></div></div>
+        <div class="point"><i aria-hidden="true"></i><div><h3>Persoonlijk contact</h3><p>Technologie maakt ons sneller, niet afstandelijker. U spreekt altijd met een van de oprichters.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="over-ons">
+    <div class="wrap">
+      <div class="copy">
+        <p class="eyebrow">Over ons</p>
+        <h2>Twee oprichters, één overtuiging.</h2>
+        <p>PlanNova is opgericht door Bram en Tom. Wij geloven dat woningbouw sneller en slimmer kan, zonder in te leveren op kwaliteit of zorgvuldigheid.</p>
+        <p>Daarom combineren we ondernemerschap en praktijkervaring met de nieuwste technologie. Kort, persoonlijk en met cijfers die u kunt narekenen.</p>
+      </div>
+      <div class="founders">
+        <div class="founder"><div class="mono-init" aria-hidden="true">B</div><h3>Bram</h3><span>Mede-oprichter</span></div>
+        <div class="founder"><div class="mono-init" aria-hidden="true">T</div><h3>Tom</h3><span>Mede-oprichter</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2>Een locatie, een idee of een vraag? We horen graag van u.</h2>
+      </div>
+      <dl>
+        <dt>E-mail</dt><dd>volgt binnenkort</dd>
+        <dt>Telefoon</dt><dd>volgt binnenkort</dd>
+        <dt>Adres</dt><dd>volgt binnenkort</dd>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="assets/logo-light.png" alt="PlanNova BV Projectontwikkeling" width="900" height="193">
+    <p class="legal">© 2026 PlanNova B.V. · KvK volgt</p>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.drop a').forEach(a=>a.addEventListener('click',()=>a.closest('details').removeAttribute('open')));
+(function(){
+  var sec=document.getElementById('groei'), cv=document.getElementById('groei-cv');
+  if(!sec||!cv) return;
+  var ctx=cv.getContext('2d');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var C=Math.cos(Math.PI/6), S=Math.sin(Math.PI/6);
+  var PX=40, PY=28, ZMAX=25;
+  var W=0,H=0,sc=1,ox=0,oy=0, cur=reduce?1:0, target=cur, raf=0;
+  var col={sand:'#EDE6D6',sand2:'#D9CCAD',sand3:'#B8A57C',gold:'#C5A45F',green:'#03241E',g2:'#0B3A31',g3:'#164b40',muted:'#A9B8AE',roof:'#2E5348',roof2:'#21423A',win:'#0B3A31',tree:'#3F6B56',tree2:'#58836B'};
+
+  function clamp(v){return v<0?0:v>1?1:v}
+  function seg(p,a,b){return clamp((p-a)/(b-a))}
+  function ease(t){return 1-Math.pow(1-t,3)}
+  function P(x,y,z){return [ox+(x-y)*C*sc, oy+((x+y)*S-z)*sc]}
+  function poly(pts,fill,stroke,lw,dash){
+    ctx.beginPath();
+    for(var i=0;i<pts.length;i++){var q=P(pts[i][0],pts[i][1],pts[i][2]); i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]);}
+    ctx.closePath();
+    if(fill){ctx.fillStyle=fill;ctx.fill();}
+    if(stroke){ctx.setLineDash(dash||[]);ctx.strokeStyle=stroke;ctx.lineWidth=lw||1;ctx.stroke();ctx.setLineDash([]);}
+  }
+  function line(a,b,stroke,lw){var p=P(a[0],a[1],a[2]),q=P(b[0],b[1],b[2]);ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1]);ctx.strokeStyle=stroke;ctx.lineWidth=lw||1;ctx.stroke();}
+  function box(x0,y0,x1,y1,z0,z1,cL,cR,cT,edge){
+    if(z1<=z0) return;
+    poly([[x0,y1,z0],[x1,y1,z0],[x1,y1,z1],[x0,y1,z1]],cL,edge,.6);
+    poly([[x1,y0,z0],[x1,y1,z0],[x1,y1,z1],[x1,y0,z1]],cR,edge,.6);
+    poly([[x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1]],cT,edge,.6);
+  }
+  function label(txt,x,y,z,color,size,align){
+    var q=P(x,y,z); ctx.font='500 '+(size||11)+'px "IBM Plex Mono", ui-monospace, monospace';
+    ctx.fillStyle=color; ctx.textAlign=align||'center'; ctx.textBaseline='middle'; ctx.fillText(txt,q[0],q[1]);
+  }
+  function hash(n){var x=Math.sin(n*127.1)*43758.5453;return x-Math.floor(x)}
+
+  function resize(){
+    var r=cv.getBoundingClientRect(), dpr=Math.min(2,window.devicePixelRatio||1);
+    W=r.width;H=r.height; if(!W||!H) return;
+    cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+    var xs=[],ys=[],pts=[[-2,-2],[PX+2,-2],[-2,PY+2],[PX+2,PY+2]];
+    for(var i=0;i<4;i++){for(var k=0;k<2;k++){var z=k?ZMAX:0;xs.push((pts[i][0]-pts[i][1])*C);ys.push((pts[i][0]+pts[i][1])*S-z);}}
+    var mnx=Math.min.apply(0,xs),mxx=Math.max.apply(0,xs),mny=Math.min.apply(0,ys),mxy=Math.max.apply(0,ys);
+    sc=Math.min(W*.96/(mxx-mnx),H*.94/(mxy-mny));
+    ox=W/2-(mnx+mxx)/2*sc; oy=H/2-(mny+mxy)/2*sc;
+    draw(cur);
+  }
+
+  var variants=[
+    [[4,4,18,12],[22,4,36,12],[4,16,36,24]],
+    [[6,5,34,13],[6,17,20,24],[24,17,34,24]],
+    [[4,5,20,17],[24,7,36,15]]
+  ];
+  var APT={x0:4,y0:5,x1:20,y1:17,fl:6,fh:3};
+  var TH={x0:24,y0:7,x1:36,y1:15,h:6,rh:3.5};
+  var trees=[[38.5,3],[38.5,19],[30,22.5],[22,25],[12,25],[2,21],[2,2]];
+
+  function aptWindows(floors,lit){
+    var n=0;
+    for(var f=0;f<floors;f++){
+      var za=f*3+.9, zb=f*3+2.4;
+      for(var i=0;i<4;i++){var xa=5.2+i*3.8, xb=xa+2.2, on=lit>hash(++n);
+        poly([[xa,17,za],[xb,17,za],[xb,17,zb],[xa,17,zb]],on?col.gold:col.win);}
+      for(var j=0;j<3;j++){var ya=6.3+j*3.7, yb=ya+2.2, on2=lit>hash(++n+50);
+        poly([[20,ya,za],[20,yb,za],[20,yb,zb],[20,ya,zb]],on2?'#B8964F':col.win);}
+    }
+  }
+  function apartment(g,lit){
+    var zt=g*APT.fl*APT.fh; if(zt<=0) return;
+    box(APT.x0,APT.y0,APT.x1,APT.y1,0,zt,col.sand,col.sand2,'#F6F3EC',col.sand3);
+    var built=Math.floor(g*APT.fl+1e-6);
+    for(var f=1;f<built;f++){
+      line([APT.x0,APT.y1,f*3],[APT.x1,APT.y1,f*3],col.sand3,.6);
+      line([APT.x1,APT.y0,f*3],[APT.x1,APT.y1,f*3],col.sand3,.6);
+    }
+    aptWindows(built,lit);
+    if(built===APT.fl){ // roof parapet
+      box(APT.x0,APT.y0,APT.x1,APT.y1,zt,zt+.6,col.sand2,col.sand3,'#E8E0CC',col.sand3);
+    }
+  }
+  function townhouses(g,r,lit){
+    var zt=g*TH.h; if(zt<=0) return;
+    box(TH.x0,TH.y0,TH.x1,TH.y1,0,zt,'#D9C59B','#B9A27A','#E6D7B4','#9C8762');
+    if(g>=1){
+      for(var u=0;u<3;u++){
+        var xa=TH.x0+u*4;
+        if(u) line([xa,TH.y1,0],[xa,TH.y1,6],'#9C8762',.8);
+        poly([[xa+.7,TH.y1,0],[xa+1.8,TH.y1,0],[xa+1.8,TH.y1,2.2],[xa+.7,TH.y1,2.2]],col.g2);
+        var on=lit>hash(200+u);
+        poly([[xa+2.3,TH.y1,.9],[xa+3.4,TH.y1,.9],[xa+3.4,TH.y1,2.3],[xa+2.3,TH.y1,2.3]],on?col.gold:col.win);
+        poly([[xa+.9,TH.y1,3.6],[xa+3.1,TH.y1,3.6],[xa+3.1,TH.y1,5],[xa+.9,TH.y1,5]],lit>hash(210+u)?col.gold:col.win);
+      }
+      poly([[TH.x1,9,3.6],[TH.x1,13,3.6],[TH.x1,13,5],[TH.x1,9,5]],lit>hash(220)?'#B8964F':col.win);
+    }
+    if(r>0){
+      var rz=TH.h+TH.rh*r, ym=(TH.y0+TH.y1)/2;
+      poly([[TH.x0,TH.y1,TH.h],[TH.x1,TH.y1,TH.h],[TH.x1,ym,rz],[TH.x0,ym,rz]],col.roof,col.roof2,.6);
+      poly([[TH.x1,TH.y0,TH.h],[TH.x1,TH.y1,TH.h],[TH.x1,ym,rz]],'#C9B38A','#9C8762',.6);
+    }
+  }
+  function crane(a,p){
+    if(a<=0) return;
+    ctx.globalAlpha=a;
+    var bx=22.5,by=1.5,h=27;
+    line([bx,by,0],[bx,by,h],col.gold,2.2);
+    var ang=Math.PI*(.95+.55*Math.sin(p*9));
+    var jx=bx+Math.cos(ang)*15, jy=by+Math.sin(ang)*15, cx=bx-Math.cos(ang)*4, cy=by-Math.sin(ang)*4;
+    line([cx,cy,h],[jx,jy,h],col.gold,1.8);
+    line([bx,by,h+3],[jx,jy,h],col.gold,.7); line([bx,by,h+3],[cx,cy,h],col.gold,.7);
+    line([bx,by,h],[bx,by,h+3],col.gold,1.4);
+    var t=.55+.35*Math.sin(p*13), hx=bx+(jx-bx)*t, hy=by+(jy-by)*t;
+    line([hx,hy,h],[hx,hy,h-6-4*Math.sin(p*17)],col.muted,.7);
+    box(cx-.6,cy-.6,cx+.6,cy+.6,h-1.6,h,col.sand3,col.sand3,col.sand2);
+    ctx.globalAlpha=1;
+  }
+  function tree(x,y,s){
+    if(s<=0) return;
+    line([x,y,0],[x,y,1.6*s],'#6B5A3A',1.4);
+    var q=P(x,y,2.6*s), r=1.5*s*sc;
+    ctx.beginPath();ctx.ellipse(q[0],q[1],r,r*1.05,0,0,Math.PI*2);ctx.fillStyle=col.tree;ctx.fill();
+    ctx.beginPath();ctx.ellipse(q[0]-r*.25,q[1]-r*.3,r*.55,r*.5,0,0,Math.PI*2);ctx.fillStyle=col.tree2;ctx.fill();
+  }
+
+  function draw(p){
+    if(!W) return;
+    ctx.clearRect(0,0,W,H);
+    // ground grid
+    ctx.globalAlpha=.55;
+    for(var g=-8;g<=48;g+=4){line([g,-6,0],[g,PY+8,0],col.g3,.6);}
+    for(var h=-6;h<=PY+8;h+=4){line([-8,h,0],[48,h,0],col.g3,.6);}
+    ctx.globalAlpha=1;
+    // plot
+    var pb=ease(seg(p,.0,.11));
+    poly([[0,0,0],[PX,0,0],[PX,PY,0],[0,PY,0]],'rgba(197,164,95,'+(.08*pb)+')');
+    var perim=2*(PX+PY), L=perim*pb, edges=[[0,0,PX,0],[PX,0,PX,PY],[PX,PY,0,PY],[0,PY,0,0]];
+    ctx.beginPath(); var st=P(0,0,0); ctx.moveTo(st[0],st[1]);
+    for(var e=0;e<4&&L>0;e++){var E=edges[e],len=Math.abs(E[2]-E[0])+Math.abs(E[3]-E[1]),f=Math.min(1,L/len);
+      var q=P(E[0]+(E[2]-E[0])*f,E[1]+(E[3]-E[1])*f,0);ctx.lineTo(q[0],q[1]);L-=len;}
+    ctx.strokeStyle=col.gold;ctx.lineWidth=2;ctx.stroke();
+    var la=seg(p,.06,.12)*(1-seg(p,.4,.46));
+    if(la>0){ctx.globalAlpha=la;label('40,0 m',PX/2,-2.4,0,col.sand,11);label('28,0 m',PX+2.6,PY/2,0,col.sand,11);ctx.globalAlpha=1;}
+    // variants
+    var vt=seg(p,.13,.31), va=seg(p,.12,.15)*(1-seg(p,.42,.47));
+    if(va>0){
+      var vi=Math.min(2,Math.floor(vt*3.2)), V=variants[vi];
+      ctx.globalAlpha=va;
+      for(var k=0;k<V.length;k++){var R=V[k];poly([[R[0],R[1],0],[R[2],R[1],0],[R[2],R[3],0],[R[0],R[3],0]],vi===2?'rgba(197,164,95,.14)':null,col.gold,1.2,[5,4]);}
+      ctx.globalAlpha=1;
+    }
+    // foundations
+    var fa=ease(seg(p,.32,.44));
+    if(fa>0){
+      box(APT.x0,APT.y0,APT.x1,APT.y1,0,.7*fa,'#8E8A7C','#6F6C61','#A6A293');
+      box(TH.x0,TH.y0,TH.x1,TH.y1,0,.7*fa,'#8E8A7C','#6F6C61','#A6A293');
+    }
+    var ga=ease(seg(p,.45,.8)), gt=ease(seg(p,.6,.8)), rf=ease(seg(p,.8,.86)), lit=seg(p,.88,.99);
+    var ca=seg(p,.38,.44)*(1-seg(p,.85,.9));
+    var ts=trees.map(function(t,i){return ease(seg(p,.85+i*.012,.92+i*.012))});
+    // painter's order by depth (x+y)
+    var items=[];
+    trees.forEach(function(t,i){items.push([t[0]+t[1],function(){tree(t[0],t[1],ts[i])}])});
+    items.push([22,function(){apartment(ga,lit)}]);
+    items.push([23,function(){crane(ca,p)}]);
+    items.push([41,function(){townhouses(gt,rf,lit)}]);
+    items.sort(function(a,b){return a[0]-b[0]}).forEach(function(it){it[1]()});
+  }
+
+  // story text
+  var phases=[
+    [0,'Kavel','Een stuk grond van 1.120 m². De vraag is altijd dezelfde: wat kan hier het beste komen?'],
+    [.13,'Varianten','AI rekent in korte tijd honderden indelingen door op woningaantal, kosten en opbrengst. De beste blijft over.'],
+    [.32,'Fundering','Het plan is uitgewerkt en vergund. De bouw start met een stevige basis.'],
+    [.45,'Bouw','Laag voor laag groeit het project: een appartementencomplex en een rij eengezinswoningen.'],
+    [.86,'Oplevering','24 appartementen en 3 eengezinswoningen. De eerste bewoners krijgen de sleutel.']
+  ];
+  var nameEl=document.getElementById('ph-name'), textEl=document.getElementById('ph-text'),
+      r1l=document.getElementById('ro1-l'), r1=document.getElementById('ro1'), r2=document.getElementById('ro2'),
+      bars=sec.querySelectorAll('.phases b'), lastPh=-1, lastR='';
+  function story(p){
+    var ph=0; for(var i=0;i<phases.length;i++) if(p>=phases[i][0]) ph=i;
+    if(ph!==lastPh){lastPh=ph;nameEl.textContent=phases[ph][1];textEl.textContent=phases[ph][2];}
+    for(var b=0;b<bars.length;b++){var a=phases[b][0], z=b<phases.length-1?phases[b+1][0]:1;bars[b].style.transform='scaleX('+clamp((p-a)/(z-a))+')';}
+    var ga=ease(seg(p,.45,.8)), built=Math.floor(ga*6+1e-6), th=seg(p,.6,.8)>=1?3:0;
+    var rl, rv;
+    if(ph===1){rl='Varianten'; rv=Math.max(1,Math.round(seg(p,.13,.31)*220))+' <small>/ 220</small>';}
+    else if(ph>=3){rl='Bouwlagen'; rv=built+' <small>/ 6</small>';}
+    else {rl='Oppervlakte'; rv='1.120 <small>m²</small>';}
+    var key=rl+rv+(built*4+th);
+    if(key!==lastR){lastR=key;r1l.textContent=rl;r1.innerHTML=rv;r2.textContent=String(built*4+th);}
+  }
+
+
+  var skipBtn=document.getElementById('skip'), doors=document.getElementById('voor-wie');
+  var cueOn=document.getElementById('cue-on'), cueOff=document.getElementById('cue-off'), KEY='plannova-skip-anim';
+  function store(v){try{v?localStorage.setItem(KEY,'1'):localStorage.removeItem(KEY)}catch(_){}}
+  function stored(){try{return localStorage.getItem(KEY)==='1'}catch(_){return false}}
+  function headOff(){var h=document.querySelector('.top');return h?h.offsetHeight:0}
+  function collapse(on){sec.hidden=on; cueOn.hidden=on; cueOff.hidden=!on;}
+  function jump(e){
+    if(e) e.preventDefault();
+    collapse(true); store(true);
+    var go=function(){window.scrollTo({top:doors.getBoundingClientRect().top+window.scrollY-headOff(),behavior:'instant'})};
+    go(); requestAnimationFrame(go);
+    doors.setAttribute('tabindex','-1'); doors.focus({preventScroll:true});
+  }
+  function replay(e){
+    e.preventDefault();
+    collapse(false); store(false);
+    resize(); cur=0; target=0;
+    window.scrollTo({top:sec.getBoundingClientRect().top+window.scrollY,behavior:'instant'});
+    draw(0); story(0); kick();
+  }
+  skipBtn.addEventListener('click',jump);
+  document.querySelectorAll('.skip-link').forEach(function(a){a.addEventListener('click',jump)});
+  document.getElementById('replay').addEventListener('click',replay);
+  if(stored()) collapse(true);
+  var _story=story; story=function(p){_story(p); skipBtn.classList.toggle('gone',p>.97);};
+  function measure(){
+    if(reduce){target=1;return;}
+    var r=sec.getBoundingClientRect(), span=r.height-window.innerHeight;
+    target=span>0?clamp(-r.top/span):1;
+  }
+  function tick(){
+    raf=0;
+    var d=target-cur;
+    cur=Math.abs(d)<.0008?target:cur+d*.14;
+    draw(cur); story(cur);
+    if(cur!==target) raf=requestAnimationFrame(tick);
+  }
+  function kick(){measure(); if(!raf) raf=requestAnimationFrame(tick);}
+  window.addEventListener('scroll',kick,{passive:true});
+  window.addEventListener('resize',function(){resize();kick();});
+  if(window.ResizeObserver) new ResizeObserver(function(){resize()}).observe(cv);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(function(){draw(cur)});
+  resize(); measure(); cur=target; draw(cur); story(cur);
+})();
+
+</script>
+</body>
+</html>
