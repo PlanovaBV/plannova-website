@@ -193,6 +193,13 @@ p{margin:0}
 .mono-init{width:72px;height:72px;background:var(--sand);display:grid;place-items:center;font:600 28px/1 var(--display);color:var(--green);margin-bottom:12px}
 .founder h3{font-size:24px}
 .founder span{font:400 13px/1.4 var(--mono);color:var(--muted)}
+.founder ul{list-style:none;margin:14px 0 0;padding:14px 0 0;border-top:1px solid var(--line);display:grid;gap:8px;font-size:15px;min-width:0}
+.founder li{display:grid;grid-template-columns:3.2em 1fr;gap:8px;align-items:baseline;min-width:0}
+.founder li b{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gold-deep)}
+.founder li a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--gold);overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.founder li a:hover{color:var(--gold-deep)}
+.contact dd span{display:block}
+@media (max-width:420px){.founders{grid-template-columns:1fr}}
 @media (max-width:800px){.about .wrap{grid-template-columns:1fr}}
 
 /* Contact */
@@ -391,8 +398,8 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
         <p>Daarom combineren we ondernemerschap en praktijkervaring met de nieuwste technologie. Kort, persoonlijk en met cijfers die u kunt narekenen.</p>
       </div>
       <div class="founders">
-        <div class="founder"><div class="mono-init" aria-hidden="true">B</div><h3>Bram</h3><span>Mede-oprichter</span></div>
-        <div class="founder"><div class="mono-init" aria-hidden="true">T</div><h3>Tom</h3><span>Mede-oprichter</span></div>
+        <div class="founder"><div class="mono-init" aria-hidden="true">B</div><h3>Bram</h3><span>Mede-oprichter</span><ul><li><b>Mail</b><a href="mailto:bram@planovabv.nl">bram@planovabv.nl</a></li><li><b>Tel</b><a href="tel:+31612855761">06 12 85 57 61</a></li></ul></div>
+        <div class="founder"><div class="mono-init" aria-hidden="true">T</div><h3>Tom</h3><span>Mede-oprichter</span><ul><li><b>Mail</b><a href="mailto:tom@planovabv.nl">tom@planovabv.nl</a></li><li><b>Tel</b><a href="tel:+31618487693">06 18 48 76 93</a></li></ul></div>
       </div>
     </div>
   </section>
@@ -405,7 +412,7 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
         <p class="intro">Laat een bericht achter, dan neemt een van de oprichters binnen twee werkdagen contact met u op.</p>
         <dl>
           <dt>E-mail</dt><dd><a href="mailto:info@planovabv.nl">info@planovabv.nl</a></dd>
-          <dt>Telefoon</dt><dd>volgt binnenkort</dd>
+          <dt>Telefoon</dt><dd><span>Bram <a href="tel:+31612855761">06 12 85 57 61</a></span><span>Tom <a href="tel:+31618487693">06 18 48 76 93</a></span></dd>
           <dt>Adres</dt><dd>volgt binnenkort</dd>
         </dl>
       </div>
