@@ -49,6 +49,7 @@ html,body{margin:0}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth}
+section[id]{scroll-margin-top:72px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
 body{overflow-anchor:none;background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--body);-webkit-font-smoothing:antialiased}
 a{color:inherit}
@@ -195,12 +196,39 @@ p{margin:0}
 @media (max-width:800px){.about .wrap{grid-template-columns:1fr}}
 
 /* Contact */
-.contact{background:var(--sand);padding-block:clamp(56px,7vw,88px)}
-.contact .wrap{display:flex;justify-content:space-between;align-items:end;gap:32px;flex-wrap:wrap}
+.contact{background:var(--sand);padding-block:clamp(56px,7vw,96px)}
+.contact .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,88px);align-items:start}
 .contact h2{font-size:clamp(30px,3.6vw,46px);max-width:14em;margin-top:14px}
-.contact dl{display:grid;grid-template-columns:auto 1fr;gap:10px 28px;margin:0;font-size:16px}
+.contact .intro{color:var(--muted);margin-top:18px;max-width:30em}
+.contact dl{display:grid;grid-template-columns:auto 1fr;gap:10px 28px;margin:32px 0 0;font-size:16px;padding-top:24px;border-top:1px solid var(--line)}
 .contact dt{font:500 12px/1.9 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gold-deep)}
-.contact dd{margin:0;color:var(--muted)}
+.contact dd{margin:0;color:var(--muted);min-width:0;overflow-wrap:anywhere}
+.contact dd a{color:var(--ink);text-underline-offset:3px}
+@media (max-width:860px){.contact .wrap{grid-template-columns:1fr}}
+.cform{background:var(--paper);border-top:2px solid var(--green);padding:clamp(22px,3vw,36px);display:grid;grid-template-columns:1fr 1fr;gap:18px 20px;min-width:0}
+.cform .full{grid-column:1/-1}
+.field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.field label{font:500 11.5px/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.field label small{font:inherit;text-transform:none;letter-spacing:.02em;color:var(--muted);opacity:.8}
+.field input,.field select,.field textarea{font:400 16px/1.4 var(--body);color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:2px;padding:12px 14px;width:100%;transition:border-color .15s,box-shadow .15s}
+.field textarea{min-height:140px;resize:vertical}
+.field select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--green) 50%),linear-gradient(135deg,var(--green) 50%,transparent 50%);background-position:calc(100% - 20px) 52%,calc(100% - 15px) 52%;background-size:5px 5px;background-repeat:no-repeat;padding-right:40px}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(197,164,95,.35)}
+.field.invalid input,.field.invalid textarea,.field.invalid select{border-color:#A3432F}
+.field .err{font-size:13.5px;color:#A3432F;min-height:0}
+.field .err:empty{display:none}
+.hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+.cform .privacy{font-size:13.5px;color:var(--muted);line-height:1.5}
+.cform .actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.cform button[type=submit]{cursor:pointer}
+.cform button[disabled]{opacity:.6;cursor:progress}
+.form-msg{font-size:15px;color:var(--muted)}
+.form-msg.bad{color:#A3432F}
+.sent{grid-column:1/-1;display:flex;flex-direction:column;gap:10px;padding-block:12px}
+.sent i{width:12px;height:12px;background:var(--gold);transform:rotate(45deg);display:block;margin-bottom:6px}
+.sent h3{font-size:26px}
+.sent p{color:var(--muted)}
+@media (max-width:560px){.cform{grid-template-columns:1fr}}
 
 /* Footer */
 footer{background:var(--green);color:var(--on-green-muted);padding-block:44px;font-size:14px}
@@ -283,19 +311,19 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
           <span class="tag">Grondeigenaren</span>
           <h3>U heeft grond of een pand met potentie.</h3>
           <p>Wij laten snel zien wat er op uw locatie mogelijk is, wat het kan opleveren en welke route het meest kansrijk is. Helder onderbouwd, zodat u een goede beslissing kunt nemen.</p>
-          <a href="#contact">Locatie bespreken <span aria-hidden="true">→</span></a>
+          <a href="#contact" data-rol="Grondeigenaar">Locatie bespreken <span aria-hidden="true">→</span></a>
         </article>
         <article class="door">
           <span class="tag">Investeerders</span>
           <h3>Projecten met cijfers die kloppen.</h3>
           <p>Elk scenario doorgerekend, elk risico in beeld. U investeert in woningbouw met een transparante onderbouwing en korte lijnen met de ontwikkelaars.</p>
-          <a href="#contact">Kennismaken <span aria-hidden="true">→</span></a>
+          <a href="#contact" data-rol="Investeerder">Kennismaken <span aria-hidden="true">→</span></a>
         </article>
         <article class="door">
           <span class="tag">Woningzoekers</span>
           <h3>Goed doordachte woningen op de juiste plek.</h3>
           <p>We ontwikkelen woningen waar vraag naar is, met aandacht voor indeling, duurzaamheid en betaalbaarheid. Onze eerste projecten staan binnenkort op deze site.</p>
-          <a href="#contact">Op de hoogte blijven <span aria-hidden="true">→</span></a>
+          <a href="#contact" data-rol="Woningzoeker">Op de hoogte blijven <span aria-hidden="true">→</span></a>
         </article>
       </div>
     </div>
@@ -374,12 +402,56 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
       <div>
         <p class="eyebrow">Contact</p>
         <h2>Een locatie, een idee of een vraag? We horen graag van u.</h2>
+        <p class="intro">Laat een bericht achter, dan neemt een van de oprichters binnen twee werkdagen contact met u op.</p>
+        <dl>
+          <dt>E-mail</dt><dd><a href="mailto:info@planovabv.nl">info@planovabv.nl</a></dd>
+          <dt>Telefoon</dt><dd>volgt binnenkort</dd>
+          <dt>Adres</dt><dd>volgt binnenkort</dd>
+        </dl>
       </div>
-      <dl>
-        <dt>E-mail</dt><dd>volgt binnenkort</dd>
-        <dt>Telefoon</dt><dd>volgt binnenkort</dd>
-        <dt>Adres</dt><dd>volgt binnenkort</dd>
-      </dl>
+
+      <form class="cform" id="cform" name="contact" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="contact">
+        <input type="hidden" name="subject" value="Nieuw bericht via planovabv.nl">
+        <p class="hp"><label>Niet invullen <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+
+        <div class="field">
+          <label for="f-naam">Naam</label>
+          <input id="f-naam" name="naam" type="text" autocomplete="name" required>
+          <span class="err" aria-live="polite"></span>
+        </div>
+        <div class="field">
+          <label for="f-email">E-mail</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required>
+          <span class="err" aria-live="polite"></span>
+        </div>
+        <div class="field">
+          <label for="f-tel">Telefoon <small>(optioneel)</small></label>
+          <input id="f-tel" name="telefoon" type="tel" autocomplete="tel">
+          <span class="err" aria-live="polite"></span>
+        </div>
+        <div class="field">
+          <label for="f-rol">Ik ben</label>
+          <select id="f-rol" name="rol">
+            <option value="">Maak een keuze</option>
+            <option value="Grondeigenaar">Grondeigenaar</option>
+            <option value="Investeerder">Investeerder</option>
+            <option value="Woningzoeker">Woningzoeker</option>
+            <option value="Anders">Anders</option>
+          </select>
+          <span class="err" aria-live="polite"></span>
+        </div>
+        <div class="field full">
+          <label for="f-bericht">Bericht</label>
+          <textarea id="f-bericht" name="bericht" required></textarea>
+          <span class="err" aria-live="polite"></span>
+        </div>
+        <p class="privacy full">We gebruiken uw gegevens alleen om op uw bericht te reageren en delen ze niet met anderen.</p>
+        <div class="actions full">
+          <button class="btn primary" type="submit">Verstuur bericht <span class="arr" aria-hidden="true">→</span></button>
+          <p class="form-msg" id="form-msg" role="status" aria-live="polite"></p>
+        </div>
+      </form>
     </div>
   </section>
 </main>
@@ -627,6 +699,42 @@ document.querySelectorAll('.drop a').forEach(a=>a.addEventListener('click',()=>a
   resize(); measure(); cur=target; draw(cur); story(cur);
 })();
 
+
+(function(){
+  var f=document.getElementById('cform'); if(!f) return;
+  var msg=document.getElementById('form-msg'), btn=f.querySelector('button[type=submit]');
+  var rules={
+    naam:function(v){return v.trim()?'':'Vul uw naam in.'},
+    email:function(v){return !v.trim()?'Vul uw e-mailadres in.':(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())?'':'Dit e-mailadres klopt niet. Controleer het nog even.')},
+    bericht:function(v){return v.trim().length>=5?'':'Schrijf een kort bericht.'}
+  };
+  function check(el){
+    var r=rules[el.name]; if(!r) return true;
+    var e=r(el.value), box=el.closest('.field');
+    box.classList.toggle('invalid',!!e); box.querySelector('.err').textContent=e;
+    el.setAttribute('aria-invalid',e?'true':'false'); return !e;
+  }
+  Object.keys(rules).forEach(function(n){var el=f.elements[n];
+    el.addEventListener('blur',function(){ if(el.value) check(el); });
+    el.addEventListener('input',function(){ if(el.closest('.field').classList.contains('invalid')) check(el); });
+  });
+  document.querySelectorAll('a[data-rol]').forEach(function(a){a.addEventListener('click',function(){f.elements.rol.value=a.getAttribute('data-rol');});});
+  var live=/(^|\.)planovabv\.nl$|\.netlify\.app$/.test(location.hostname);
+  function done(note){
+    f.innerHTML='<div class="sent" role="status"><i aria-hidden="true"></i><h3>Bedankt voor uw bericht.</h3><p>We hebben het ontvangen en nemen binnen twee werkdagen contact met u op.'+(note||'')+'</p></div>';
+  }
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var ok=true, first=null;
+    Object.keys(rules).forEach(function(n){ if(!check(f.elements[n])){ok=false; first=first||f.elements[n];} });
+    if(!ok){ first.focus(); msg.className='form-msg bad'; msg.textContent='Vul de gemarkeerde velden in.'; return; }
+    if(!live){ done(' <em>(Voorbeeld: dit bericht is niet echt verstuurd.)</em>'); return; }
+    btn.disabled=true; msg.className='form-msg'; msg.textContent='Bezig met versturen…';
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(f)).toString()})
+      .then(function(r){ if(!r.ok) throw new Error(r.status); done(); })
+      .catch(function(){ btn.disabled=false; msg.className='form-msg bad'; msg.textContent='Versturen is niet gelukt. Probeer het opnieuw of mail ons op info@planovabv.nl.'; });
+  });
+})();
 </script>
 </body>
 </html>
