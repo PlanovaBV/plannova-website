@@ -190,7 +190,8 @@ p{margin:0}
 .about .copy p{color:var(--muted);margin-top:18px;max-width:34em}
 .founders{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .founder{border-top:2px solid var(--green);padding-top:20px;display:flex;flex-direction:column;gap:6px}
-.mono-init{width:72px;height:72px;background:var(--sand);display:grid;place-items:center;font:600 28px/1 var(--display);color:var(--green);margin-bottom:12px}
+.portrait{width:100%;max-width:240px;aspect-ratio:4/5;background:var(--sand);display:grid;place-items:center;font:600 56px/1 var(--display);color:var(--green);margin-bottom:12px;overflow:hidden}
+.portrait img{width:100%;height:100%;object-fit:cover;display:block}
 .founder h3{font-size:24px}
 .founder span{font:400 13px/1.4 var(--mono);color:var(--muted)}
 .founder ul{list-style:none;margin:14px 0 0;padding:14px 0 0;border-top:1px solid var(--line);display:grid;gap:8px;font-size:15px;min-width:0}
@@ -398,8 +399,8 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
         <p>Daarom combineren we ondernemerschap en praktijkervaring met de nieuwste technologie. Kort, persoonlijk en met cijfers die u kunt narekenen.</p>
       </div>
       <div class="founders">
-        <div class="founder"><div class="mono-init" aria-hidden="true">B</div><h3>Bram</h3><span>Mede-oprichter</span><ul><li><b>Mail</b><a href="mailto:bram@planovabv.nl">bram@planovabv.nl</a></li><li><b>Tel</b><a href="tel:+31612855761">06 12 85 57 61</a></li></ul></div>
-        <div class="founder"><div class="mono-init" aria-hidden="true">T</div><h3>Tom</h3><span>Mede-oprichter</span><ul><li><b>Mail</b><a href="mailto:tom@planovabv.nl">tom@planovabv.nl</a></li><li><b>Tel</b><a href="tel:+31618487693">06 18 48 76 93</a></li></ul></div>
+        <div class="founder"><div class="portrait" aria-hidden="true">B</div><h3>Bram</h3><span>Mede-oprichter</span><ul><li><b>Mail</b><a href="mailto:bram@planovabv.nl">bram@planovabv.nl</a></li><li><b>Tel</b><a href="tel:+31612855761">06 12 85 57 61</a></li></ul></div>
+        <div class="founder"><div class="portrait"><img src="assets/tom.jpg" alt="Portretfoto van Tom" width="600" height="750" loading="lazy" decoding="async"></div><h3>Tom</h3><span>Mede-oprichter</span><ul><li><b>Mail</b><a href="mailto:tom@planovabv.nl">tom@planovabv.nl</a></li><li><b>Tel</b><a href="tel:+31618487693">06 18 48 76 93</a></li></ul></div>
       </div>
     </div>
   </section>
