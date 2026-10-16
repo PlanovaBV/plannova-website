@@ -163,7 +163,7 @@ p{margin:0}
 .abc{background:var(--sand);border-top:1px solid var(--line)}
 .abc-intro{padding-block:clamp(64px,8vw,104px) 0}
 .abc-intro .sec-head{margin-bottom:0}
-.abc-scroll{position:relative;height:360vh}
+.abc-scroll{position:relative;height:560vh}
 .abc-stage{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center}
 .abc-grid{width:100%;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.2fr);gap:clamp(24px,5vw,72px);align-items:center;padding-block:80px 32px}
 .abc-steps{list-style:none;margin:0;padding:0;display:grid;gap:6px;counter-reset:a}
@@ -180,7 +180,7 @@ p{margin:0}
 .abc-cap{margin-top:12px;font:400 12px/1.4 var(--mono);color:var(--on-green-muted);letter-spacing:.04em;min-height:1.4em}
 .abc-cap b{color:var(--gold);font-weight:500}
 @media (max-width:860px){
-  .abc-scroll{height:400vh}
+  .abc-scroll{height:620vh}
   .abc-grid{grid-template-columns:1fr;padding-block:64px 20px;gap:14px}
   .abc-steps li{display:none;opacity:1}
   .abc-steps li.on{display:block}
@@ -885,8 +885,10 @@ document.querySelectorAll('.drop a').forEach(a=>a.addEventListener('click',()=>a
     if(dashed){lab.style.strokeDashoffset=0;lbc.style.strokeDashoffset=0;}
   }
   var cur=reduce?1:0, target=cur, raf=0;
-  function measure(){ if(reduce){target=1;return;} var r=sc.getBoundingClientRect(), span=r.height-innerHeight; target=span>0?cl(-r.top/span):1; }
-  function tick(){ raf=0; var d=target-cur; cur=Math.abs(d)<.001?target:cur+d*.18; render(cur); if(cur!==target) raf=requestAnimationFrame(tick); }
+  function measure(){ if(reduce){target=1;return;} var r=sc.getBoundingClientRect(), span=r.height-innerHeight, s=span>0?cl(-r.top/span):1;
+    // stap 1-3 krijgen 55% van de scroll, stap 4 (betaling, levering, bouw) 45%
+    target=s<.55?s/.55*.75:.75+(s-.55)/.45*.25; }
+  function tick(){ raf=0; var d=target-cur; cur=Math.abs(d)<.0008?target:cur+d*.12; render(cur); if(cur!==target) raf=requestAnimationFrame(tick); }
   function kick(){ measure(); if(!raf) raf=requestAnimationFrame(tick); }
   addEventListener('scroll',kick,{passive:true}); addEventListener('resize',kick);
   measure(); cur=target; render(cur);
