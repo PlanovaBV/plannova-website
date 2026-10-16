@@ -170,6 +170,8 @@ p{margin:0}
 .abc-steps li{counter-increment:a;padding:16px 18px 16px 20px;border-left:2px solid var(--sand-2);transition:border-color .3s,background .3s,opacity .3s;opacity:.55}
 .abc-steps li.on{border-left-color:var(--gold);background:var(--paper);opacity:1}
 .abc-steps li.done{opacity:.8}
+.abc-steps li:not(.on) p{display:none}
+.abc-steps li{padding-block:12px}
 .abc-steps .k{font:500 11.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep)}
 .abc-steps h3{font-size:22px;margin-top:8px}
 .abc-steps p{color:var(--muted);font-size:15.5px;margin-top:6px}
@@ -187,6 +189,7 @@ p{margin:0}
 @media (prefers-reduced-motion:reduce){
   .abc-scroll{height:auto}.abc-stage{position:relative;height:auto}
   .abc-steps li{display:block!important;opacity:1}
+  .abc-steps li p{display:block!important}
 }
 .abc-big{font:600 26px var(--display);fill:#EDE6D6}
 .abc-lbl{font:500 10.5px var(--mono);letter-spacing:.12em;fill:#A9B8AE}
@@ -382,7 +385,7 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
           <p class="eyebrow">ABC-constructie</p>
           <h2 id="abc-h">Zo werkt een ABC-constructie.</h2>
         </div>
-        <p>Bij een ABC-constructie zijn drie partijen betrokken: de eigenaar van de grond (A), PlanNova als ontwikkelaar (B) en de koper van het project (C). PlanNova maakt met de eigenaar afspraken over het ontwikkelrecht. Als het plan rond is, levert de notaris de grond in één keer rechtstreeks van A aan C. PlanNova wordt zelf nooit eigenaar van de grond.</p>
+        <p>Bij een ABC-constructie zijn drie partijen betrokken: de eigenaar van de grond (A), PlanNova als ontwikkelaar en bouwer (B) en de koper van de woning (C). PlanNova maakt met de eigenaar afspraken over het ontwikkelrecht en verkoopt de woningen. De notaris levert de grond in één keer rechtstreeks van A aan de koper, en PlanNova bouwt daar de woning. PlanNova wordt zelf nooit eigenaar van de grond.</p>
       </div>
     </div>
     <div class="abc-scroll" id="abc-scroll">
@@ -391,12 +394,12 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
           <ol class="abc-steps" id="abc-steps">
             <li class="on"><span class="k">Stap 1 · A en B</span><h3>Afspraak over het ontwikkelrecht</h3><p>U en PlanNova leggen vast dat wij uw locatie mogen ontwikkelen, en onder welke voorwaarden de grond straks wordt geleverd. U blijft eigenaar.</p></li>
             <li><span class="k">Stap 2 · B</span><h3>Wij werken het plan uit</h3><p>PlanNova onderzoekt de mogelijkheden, maakt het plan en regelt de vergunning. Het werk en het risico van deze fase liggen bij ons.</p></li>
-            <li><span class="k">Stap 3 · B en C</span><h3>Wij maken het project koopklaar</h3><p>Met het plan, de vergunning en de afspraken met de eigenaar zorgt PlanNova ervoor dat de koper (C) het project kan kopen, bijvoorbeeld een belegger of bouwpartner.</p></li>
-            <li><span class="k">Stap 4 · A naar C</span><h3>Eén levering bij de notaris</h3><p>De notaris levert de grond in één akte rechtstreeks van u aan de koper. U ontvangt de afgesproken prijs; de grond wisselt maar één keer van eigenaar.</p></li>
+            <li><span class="k">Stap 3 · B en C</span><h3>De koper kiest een woning</h3><p>Is het plan rond, dan verkopen wij de woningen. De koper (C) koopt bij PlanNova een woning die wij voor hem of haar bouwen.</p></li>
+            <li><span class="k">Stap 4 · A naar C</span><h3>Levering en bouw</h3><p>De notaris levert de grond in één akte rechtstreeks van u aan de koper, en u ontvangt de afgesproken prijs. Daarna bouwt PlanNova de woning. De grond wisselt maar één keer van eigenaar.</p></li>
           </ol>
           <figure class="abc-visual" style="margin:0">
             <svg viewBox="0 0 600 400" role="img" aria-labelledby="abc-t">
-              <title id="abc-t">Schema ABC-constructie: grondeigenaar A, PlanNova B en koper C; de notaris levert de grond in één akte van A aan C.</title>
+              <title id="abc-t">Schema ABC-constructie: grondeigenaar A, PlanNova B en woningkoper C; de notaris levert de grond in één akte van A aan C, en PlanNova bouwt de woning.</title>
               <defs><marker id="abc-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#C5A45F"/></marker></defs>
               <g stroke="#164b40" stroke-width=".6"><path d="M0 50H600M0 150H600M0 250H600M0 350H600M100 0V400M200 0V400M300 0V400M400 0V400M500 0V400"/></g>
               <!-- verbindingen -->
@@ -404,13 +407,13 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
               <path id="l-bc" class="abc-line" d="M338 262 L462 128" stroke="#C5A45F" stroke-width="2" fill="none"/>
               <path id="l-ac" class="abc-line" d="M150 92 L450 92" stroke="#EDE6D6" stroke-width="2.4" fill="none" marker-end="url(#abc-arr)"/>
               <text id="t-ab" x="178" y="214" class="abc-tag" transform="rotate(47 178 214)">ontwikkelrecht</text>
-              <text id="t-bc" x="376" y="236" class="abc-tag" transform="rotate(-47 376 236)">koopklaar plan</text>
+              <text id="t-bc" x="376" y="236" class="abc-tag" transform="rotate(-47 376 236)">koopt woning</text>
               <!-- notaris -->
               <g id="g-not"><rect x="262" y="70" width="76" height="44" rx="2" fill="#03241E" stroke="#C5A45F" stroke-width="1.4"/><text x="300" y="97" class="abc-lbl" text-anchor="middle">NOTARIS</text></g>
               <!-- knopen -->
               <g id="n-a"><rect x="40" y="56" width="110" height="72" rx="2" fill="#0B3A31" stroke="#EDE6D6" stroke-width="1.2"/><text x="95" y="88" class="abc-big" text-anchor="middle">A</text><text x="95" y="112" class="abc-lbl" text-anchor="middle">GRONDEIGENAAR</text></g>
               <g id="n-b"><rect x="245" y="262" width="110" height="72" rx="2" fill="#0B3A31" stroke="#C5A45F" stroke-width="1.6"/><text x="300" y="294" class="abc-big" text-anchor="middle" fill="#C5A45F">B</text><text x="300" y="318" class="abc-lbl" text-anchor="middle">PLANNOVA</text></g>
-              <g id="n-c"><rect x="450" y="56" width="110" height="72" rx="2" fill="#0B3A31" stroke="#EDE6D6" stroke-width="1.2"/><text x="505" y="88" class="abc-big" text-anchor="middle">C</text><text x="505" y="112" class="abc-lbl" text-anchor="middle">KOPER</text></g>
+              <g id="n-c"><rect x="450" y="56" width="110" height="72" rx="2" fill="#0B3A31" stroke="#EDE6D6" stroke-width="1.2"/><text x="505" y="88" class="abc-big" text-anchor="middle">C</text><text x="505" y="112" class="abc-lbl" text-anchor="middle">WONINGKOPER</text></g>
               <!-- plan onder B -->
               <g id="g-plan">
                 <rect x="372" y="276" width="14" height="14" fill="none" stroke="#C5A45F"/><path id="c1" d="M375 283l3 3 6-7" stroke="#C5A45F" stroke-width="1.8" fill="none"/><text x="394" y="288" class="abc-lbl2">PLAN</text>
@@ -418,6 +421,13 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
                 <rect x="372" y="320" width="14" height="14" fill="none" stroke="#C5A45F"/><path id="c3" d="M375 327l3 3 6-7" stroke="#C5A45F" stroke-width="1.8" fill="none"/><text x="394" y="332" class="abc-lbl2">HAALBAARHEID</text>
               </g>
               <g id="pkg" style="opacity:0"><rect x="-14" y="-17" width="28" height="34" rx="1.5" fill="#EDE6D6"/><path d="M-8 -8H8M-8 -2H8M-8 4H3" stroke="#0B3A31" stroke-width="1.6"/><circle cx="8" cy="10" r="6" fill="#C5A45F"/><path d="M5 10l2 2 4-4" stroke="#03241E" stroke-width="1.6" fill="none"/></g>
+              <!-- woning die B bouwt op het kavel van C -->
+              <g id="house" transform="translate(505 150)" style="opacity:0">
+                <path id="h-body" d="M-11 13 V-1 H11 V13 Z" fill="#EDE6D6"/>
+                <path id="h-roof" d="M-14 -1 L0 -14 L14 -1 Z" fill="#C5A45F"/>
+                <rect x="-3" y="5" width="6" height="8" fill="#0B3A31"/>
+              </g>
+              <path id="l-build" d="M330 262 Q 470 230 505 168" stroke="#C5A45F" stroke-width="1.2" stroke-dasharray="3 4" fill="none" style="opacity:0"/>
               <!-- kavel-token -->
               <g id="tok"><rect x="-13" y="-13" width="26" height="26" fill="rgba(197,164,95,.25)" stroke="#C5A45F" stroke-width="1.6"/><path d="M-13 0H13M0 -13V13" stroke="#C5A45F" stroke-width=".8"/></g>
             </svg>
@@ -839,13 +849,13 @@ document.querySelectorAll('.drop a').forEach(a=>a.addEventListener('click',()=>a
   var steps=[].slice.call(document.querySelectorAll('#abc-steps li')), cap=document.getElementById('abc-cap');
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   function $(id){return document.getElementById(id)}
-  var pkg=$('pkg'), lab=$('l-ab'), lbc=$('l-bc'), lac=$('l-ac'), plan=$('g-plan'), not=$('g-not'), tok=$('tok'), nc=$('n-c'), tab=$('t-ab'), tbc=$('t-bc');
+  var pkg=$('pkg'), house=$('house'), hbody=$('h-body'), hroof=$('h-roof'), build=$('l-build'), lab=$('l-ab'), lbc=$('l-bc'), lac=$('l-ac'), plan=$('g-plan'), not=$('g-not'), tok=$('tok'), nc=$('n-c'), tab=$('t-ab'), tbc=$('t-bc');
   var checks=[$('c1'),$('c2'),$('c3')];
   [lab,lbc,lac].concat(checks).forEach(function(el){var L=el.getTotalLength(); el.style.strokeDasharray=L; el.dataset.len=L;});
   function cl(v){return v<0?0:v>1?1:v}
   function seg(p,a,b){return cl((p-a)/(b-a))}
   function draw(el,f){el.style.strokeDashoffset=(1-f)*el.dataset.len}
-  var caps=['A blijft eigenaar · B krijgt het <b>ontwikkelrecht</b>','B werkt het plan uit · <b>plan, vergunning, haalbaarheid</b>','B maakt het project <b>koopklaar</b> voor C','Eén akte · grond gaat <b>direct van A naar C</b>'];
+  var caps=['A blijft eigenaar · B krijgt het <b>ontwikkelrecht</b>','B werkt het plan uit · <b>plan, vergunning, haalbaarheid</b>','C koopt bij B een <b>woning uit het plan</b>','Grond gaat <b>direct van A naar C</b> · B <b>bouwt de woning</b>'];
   var last=-1;
   function render(p){
     var s=Math.min(3,Math.floor(p*4));
@@ -853,12 +863,13 @@ document.querySelectorAll('.drop a').forEach(a=>a.addEventListener('click',()=>a
     draw(lab,seg(p,.02,.18)); tab.style.opacity=seg(p,.12,.2);
     plan.style.opacity=seg(p,.25,.3); checks.forEach(function(c,i){draw(c,seg(p,.3+i*.05,.34+i*.05))});
     draw(lbc,seg(p,.52,.68)); tbc.style.opacity=seg(p,.62,.7); nc.style.opacity=.35+.65*seg(p,.5,.6);
-    var f=seg(p,.75,.82); not.style.opacity=f; lac.style.opacity=seg(p,.79,.81); draw(lac,seg(p,.8,.95));
-    var m=seg(p,.82,.97), em=m<.5?2*m*m:1-Math.pow(-2*m+2,2)/2;
+    var f=seg(p,.73,.78); not.style.opacity=f; lac.style.opacity=seg(p,.76,.78); draw(lac,seg(p,.77,.88));
+    var hb=seg(p,.9,.99); house.style.opacity=hb>0?1:0; hbody.style.transformBox='fill-box'; hbody.style.transformOrigin='50% 100%'; hbody.style.transform='scaleY('+hb+')'; hroof.style.opacity=seg(p,.96,.99); build.style.opacity=seg(p,.88,.91);
+    tok.style.opacity=(p<.78?seg(p,0,.06):1)*(1-seg(p,.92,.96)*.6);
+    var m=seg(p,.78,.88), em=m<.5?2*m*m:1-Math.pow(-2*m+2,2)/2;
     tok.setAttribute('transform','translate('+(95+(505-95)*em)+' 150)');
     var k=seg(p,.52,.68);
     pkg.setAttribute('transform','translate('+(338+(470-338)*k)+' '+(262+(140-262)*k)+')'); pkg.style.opacity=seg(p,.52,.55)*(1-seg(p,.8,.84));
-    tok.style.opacity=p<.78?seg(p,0,.06):1;
     var dashed=p>.85; lab.style.strokeDasharray=dashed?'5 5':lab.dataset.len; lbc.style.strokeDasharray=dashed?'5 5':lbc.dataset.len;
     if(dashed){lab.style.strokeDashoffset=0;lbc.style.strokeDashoffset=0;}
   }
