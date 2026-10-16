@@ -385,7 +385,7 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
           <p class="eyebrow">ABC-constructie</p>
           <h2 id="abc-h">Zo werkt een ABC-constructie.</h2>
         </div>
-        <p>Bij een ABC-constructie zijn drie partijen betrokken: de eigenaar van de grond (A), PlanNova als ontwikkelaar en bouwer (B) en de koper van de woning (C). PlanNova maakt met de eigenaar afspraken over het ontwikkelrecht en verkoopt de woningen. De notaris levert de grond in één keer rechtstreeks van A aan de koper, en PlanNova bouwt daar de woning. PlanNova wordt zelf nooit eigenaar van de grond.</p>
+        <p>Bij een ABC-constructie zijn drie partijen betrokken: de eigenaar van de grond (A), PlanNova als ontwikkelaar en bouwer (B) en de koper van de woning (C). PlanNova maakt met de eigenaar afspraken over het ontwikkelrecht, werkt het plan uit en vindt de kopers voor de woningen. De notaris levert de grond in één keer rechtstreeks van A aan de koper, en PlanNova bouwt daar de woning. PlanNova wordt zelf nooit eigenaar van de grond.</p>
       </div>
     </div>
     <div class="abc-scroll" id="abc-scroll">
@@ -394,7 +394,7 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
           <ol class="abc-steps" id="abc-steps">
             <li class="on"><span class="k">Stap 1 · A en B</span><h3>Afspraak over het ontwikkelrecht</h3><p>U en PlanNova leggen vast dat wij uw locatie mogen ontwikkelen, en onder welke voorwaarden de grond straks wordt geleverd. U blijft eigenaar.</p></li>
             <li><span class="k">Stap 2 · B</span><h3>Wij werken het plan uit</h3><p>PlanNova onderzoekt de mogelijkheden, maakt het plan en regelt de vergunning. Het werk en het risico van deze fase liggen bij ons.</p></li>
-            <li><span class="k">Stap 3 · B en C</span><h3>De koper kiest een woning</h3><p>Is het plan rond, dan verkopen wij de woningen. De koper (C) koopt bij PlanNova een woning die wij voor hem of haar bouwen.</p></li>
+            <li><span class="k">Stap 3 · B en C</span><h3>Wij vinden de koper</h3><p>Is het plan rond, dan zoeken en vinden wij de kopers voor de woningen. De koper (C) koopt bij PlanNova een woning die wij voor hem of haar bouwen.</p></li>
             <li><span class="k">Stap 4 · A naar C</span><h3>Levering en bouw</h3><p>De notaris levert de grond in één akte rechtstreeks van u aan de koper, en u ontvangt de afgesproken prijs. Daarna bouwt PlanNova de woning. De grond wisselt maar één keer van eigenaar.</p></li>
           </ol>
           <figure class="abc-visual" style="margin:0">
@@ -855,7 +855,7 @@ document.querySelectorAll('.drop a').forEach(a=>a.addEventListener('click',()=>a
   function cl(v){return v<0?0:v>1?1:v}
   function seg(p,a,b){return cl((p-a)/(b-a))}
   function draw(el,f){el.style.strokeDashoffset=(1-f)*el.dataset.len}
-  var caps=['A blijft eigenaar · B krijgt het <b>ontwikkelrecht</b>','B werkt het plan uit · <b>plan, vergunning, haalbaarheid</b>','C koopt bij B een <b>woning uit het plan</b>','Grond gaat <b>direct van A naar C</b> · B <b>bouwt de woning</b>'];
+  var caps=['A blijft eigenaar · B krijgt het <b>ontwikkelrecht</b>','B werkt het plan uit · <b>plan, vergunning, haalbaarheid</b>','B vindt een <b>koper (C)</b> voor de woning','Grond gaat <b>direct van A naar C</b> · B <b>bouwt de woning</b>'];
   var last=-1;
   function render(p){
     var s=Math.min(3,Math.floor(p*4));
