@@ -71,7 +71,7 @@ main{padding-block:24px 40px}
           <li><a href="tel:+31612855761">+31 6 12 85 57 61</a></li>
           <li><a href="mailto:bram@planovabv.nl">bram@planovabv.nl</a></li>
         </ul>
-        <a class="save" href="/contact/bram-plannova.vcf" download="Bram Vissers - PlanNova.vcf">
+        <a class="save" href="/contact/bram-plannova.vcf">
           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="8" cy="7" r="3.2"/><path d="M2.5 16.5c.8-3 3-4.5 5.5-4.5s4.7 1.5 5.5 4.5M15.5 6v6M12.5 9h6"/></svg>
           Bram opslaan in contacten
         </a>
@@ -84,13 +84,20 @@ main{padding-block:24px 40px}
           <li><a href="tel:+31618487693">+31 6 18 48 76 93</a></li>
           <li><a href="mailto:tom@planovabv.nl">tom@planovabv.nl</a></li>
         </ul>
-        <a class="save" href="/contact/tom-plannova.vcf" download="Tom Wasmann - PlanNova.vcf">
+        <a class="save" href="/contact/tom-plannova.vcf">
           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="8" cy="7" r="3.2"/><path d="M2.5 16.5c.8-3 3-4.5 5.5-4.5s4.7 1.5 5.5 4.5M15.5 6v6M12.5 9h6"/></svg>
           Tom opslaan in contacten
         </a>
       </section>
     </div>
-    <p class="hint">Na het tikken op de knop toont uw telefoon het contact. Kies daar "Opslaan" of "Contact toevoegen".</p>
+    <p class="hint" id="hint">Na het tikken op de knop toont uw telefoon het contact. Kies daar "Maak nieuw contact" of "Opslaan".</p>
+    <script>
+    (function(){
+      if(/Android/i.test(navigator.userAgent)){
+        document.getElementById('hint').textContent='Op Android wordt het contact eerst gedownload. Tik daarna onderin op "Openen" (of open de melding bovenin) en kies "Opslaan".';
+      }
+    })();
+    </script>
     <nav class="more" aria-label="Meer">
       <a href="/">Naar planovabv.nl</a>
       <a href="/#contact">Stuur ons een bericht</a>

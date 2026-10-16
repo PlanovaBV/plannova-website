@@ -28,4 +28,5 @@
   for = "/contact/*.vcf"
   [headers.values]
     Content-Type = "text/vcard; charset=utf-8"
+    Content-Disposition = "inline"
     Cache-Control = "public, max-age=3600"
