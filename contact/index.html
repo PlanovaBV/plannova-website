@@ -93,9 +93,23 @@ main{padding-block:24px 40px}
     <p class="hint" id="hint">Na het tikken op de knop toont uw telefoon het contact. Kies daar "Maak nieuw contact" of "Opslaan".</p>
     <script>
     (function(){
-      if(/Android/i.test(navigator.userAgent)){
-        document.getElementById('hint').textContent='Op Android wordt het contact eerst gedownload. Tik daarna onderin op "Openen" (of open de melding bovenin) en kies "Opslaan".';
-      }
+      if(!/Android/i.test(navigator.userAgent)) return;
+      // Android: open het scherm "Contact maken" met ingevulde gegevens; terugvallen op de vCard-download.
+      var people={
+        bram:{name:'Bram Vissers',phone:'+31612855761',email:'bram@planovabv.nl'},
+        tom:{name:'Tom Wasmann',phone:'+31618487693',email:'tom@planovabv.nl'}
+      };
+      document.querySelectorAll('a.save').forEach(function(a){
+        var key=/\/contact\/(\w+)-plannova\.vcf/.exec(a.getAttribute('href'));
+        var p=key&&people[key[1]]; if(!p) return;
+        var fallback=new URL(a.getAttribute('href'),location.href).href;
+        var e=encodeURIComponent;
+        a.href='intent:#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/raw_contact;'+
+          'S.name='+e(p.name)+';S.phone='+e(p.phone)+';S.email='+e(p.email)+';'+
+          'S.company='+e('PlanNova B.V.')+';S.job_title='+e('Mede-oprichter')+';'+
+          'S.browser_fallback_url='+e(fallback)+';end';
+      });
+      document.getElementById('hint').textContent='Na het tikken op de knop opent uw telefoon "Contact maken" met de gegevens al ingevuld. Tik op "Opslaan".';
     })();
     </script>
     <nav class="more" aria-label="Meer">
