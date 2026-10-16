@@ -157,6 +157,41 @@ p{margin:0}
 .door a:hover{color:var(--gold-deep)}
 @media (max-width:860px){.door-grid{grid-template-columns:1fr}.door,.door+.door{padding:28px 0;border-left:0;border-bottom:1px solid var(--line)}}
 
+
+/* ABC-constructie: short pinned explainer */
+.door a.how{margin-top:0;padding-top:0;border-bottom:0;font-weight:500;font-size:15px;color:var(--gold-deep);text-decoration:underline;text-underline-offset:3px}
+.abc{background:var(--sand);border-top:1px solid var(--line)}
+.abc-intro{padding-block:clamp(64px,8vw,104px) 0}
+.abc-intro .sec-head{margin-bottom:0}
+.abc-scroll{position:relative;height:300vh}
+.abc-stage{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center}
+.abc-grid{width:100%;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.2fr);gap:clamp(24px,5vw,72px);align-items:center;padding-block:80px 32px}
+.abc-steps{list-style:none;margin:0;padding:0;display:grid;gap:6px;counter-reset:a}
+.abc-steps li{counter-increment:a;padding:16px 18px 16px 20px;border-left:2px solid var(--sand-2);transition:border-color .3s,background .3s,opacity .3s;opacity:.55}
+.abc-steps li.on{border-left-color:var(--gold);background:var(--paper);opacity:1}
+.abc-steps li.done{opacity:.8}
+.abc-steps .k{font:500 11.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep)}
+.abc-steps h3{font-size:22px;margin-top:8px}
+.abc-steps p{color:var(--muted);font-size:15.5px;margin-top:6px}
+.abc-visual{background:var(--green);border-radius:3px;padding:clamp(14px,2vw,24px);min-width:0}
+.abc-visual svg{display:block;width:100%;height:auto}
+.abc-cap{margin-top:12px;font:400 12px/1.4 var(--mono);color:var(--on-green-muted);letter-spacing:.04em;min-height:1.4em}
+.abc-cap b{color:var(--gold);font-weight:500}
+@media (max-width:860px){
+  .abc-scroll{height:340vh}
+  .abc-grid{grid-template-columns:1fr;padding-block:64px 20px;gap:14px}
+  .abc-steps li{display:none;opacity:1}
+  .abc-steps li.on{display:block}
+  .abc-steps h3{font-size:20px}
+}
+@media (prefers-reduced-motion:reduce){
+  .abc-scroll{height:auto}.abc-stage{position:relative;height:auto}
+  .abc-steps li{display:block!important;opacity:1}
+}
+.abc-big{font:600 26px var(--display);fill:#EDE6D6}
+.abc-lbl{font:500 10.5px var(--mono);letter-spacing:.12em;fill:#A9B8AE}
+.abc-lbl2{font:500 10px var(--mono);letter-spacing:.1em;fill:#EDE6D6}
+.abc-tag{font:500 10.5px var(--mono);letter-spacing:.06em;fill:#C5A45F}
 /* Process */
 .process{background:var(--sand);padding-block:clamp(64px,8vw,104px)}
 .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s}
@@ -319,9 +354,10 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
       <div class="door-grid">
         <article class="door">
           <span class="tag">Grondeigenaren</span>
-          <h3>U heeft grond of een pand met potentie.</h3>
-          <p>Wij laten snel zien wat er op uw locatie mogelijk is, wat het kan opleveren en welke route het meest kansrijk is. Helder onderbouwd, zodat u een goede beslissing kunt nemen.</p>
-          <a href="#contact" data-rol="Grondeigenaar">Locatie bespreken <span aria-hidden="true">→</span></a>
+          <h3>Heeft u grond of een pand met potentie?</h3>
+          <p>Wij werken met een ABC-constructie: we maken met u afspraken over het ontwikkelrecht van uw locatie, en u blijft eigenaar tot de notaris levert. Dankzij onze kennis en data zien we snel wat er mogelijk is, en doen we u op korte termijn een serieus, onderbouwd voorstel.</p>
+          <a class="how" href="#abc">Hoe werkt een ABC-constructie?</a>
+          <a href="#contact" data-rol="Grondeigenaar">Locatie voorleggen <span aria-hidden="true">→</span></a>
         </article>
         <article class="door">
           <span class="tag">Investeerders</span>
@@ -335,6 +371,58 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
           <p>We ontwikkelen woningen waar vraag naar is, met aandacht voor indeling, duurzaamheid en betaalbaarheid. Onze eerste projecten staan binnenkort op deze site.</p>
           <a href="#contact" data-rol="Woningzoeker">Op de hoogte blijven <span aria-hidden="true">→</span></a>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="abc" id="abc" aria-labelledby="abc-h">
+    <div class="wrap abc-intro">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">ABC-constructie</p>
+          <h2 id="abc-h">Zo werkt een ABC-constructie.</h2>
+        </div>
+        <p>Bij een ABC-constructie zijn drie partijen betrokken: de eigenaar van de grond (A), PlanNova als ontwikkelaar (B) en de koper van het project (C). PlanNova maakt met de eigenaar afspraken over het ontwikkelrecht. Als het plan rond is, levert de notaris de grond in één keer rechtstreeks van A aan C. PlanNova wordt zelf nooit eigenaar van de grond.</p>
+      </div>
+    </div>
+    <div class="abc-scroll" id="abc-scroll">
+      <div class="abc-stage">
+        <div class="wrap abc-grid">
+          <ol class="abc-steps" id="abc-steps">
+            <li class="on"><span class="k">Stap 1 · A en B</span><h3>Afspraak over het ontwikkelrecht</h3><p>U en PlanNova leggen vast dat wij uw locatie mogen ontwikkelen, en onder welke voorwaarden de grond straks wordt geleverd. U blijft eigenaar.</p></li>
+            <li><span class="k">Stap 2 · B</span><h3>Wij werken het plan uit</h3><p>PlanNova onderzoekt de mogelijkheden, maakt het plan en regelt de vergunning. Het werk en het risico van deze fase liggen bij ons.</p></li>
+            <li><span class="k">Stap 3 · B en C</span><h3>Een koper voor het project</h3><p>Voor het uitgewerkte plan zoeken we de partij die het project afneemt: de koper (C), bijvoorbeeld een belegger of bouwpartner.</p></li>
+            <li><span class="k">Stap 4 · A naar C</span><h3>Eén levering bij de notaris</h3><p>De notaris levert de grond in één akte rechtstreeks van u aan de koper. U ontvangt de afgesproken prijs; de grond wisselt maar één keer van eigenaar.</p></li>
+          </ol>
+          <figure class="abc-visual" style="margin:0">
+            <svg viewBox="0 0 600 400" role="img" aria-labelledby="abc-t">
+              <title id="abc-t">Schema ABC-constructie: grondeigenaar A, PlanNova B en koper C; de notaris levert de grond in één akte van A aan C.</title>
+              <defs><marker id="abc-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#C5A45F"/></marker></defs>
+              <g stroke="#164b40" stroke-width=".6"><path d="M0 50H600M0 150H600M0 250H600M0 350H600M100 0V400M200 0V400M300 0V400M400 0V400M500 0V400"/></g>
+              <!-- verbindingen -->
+              <path id="l-ab" class="abc-line" d="M138 128 L262 262" stroke="#C5A45F" stroke-width="2" fill="none"/>
+              <path id="l-bc" class="abc-line" d="M338 262 L462 128" stroke="#C5A45F" stroke-width="2" fill="none"/>
+              <path id="l-ac" class="abc-line" d="M150 92 L450 92" stroke="#EDE6D6" stroke-width="2.4" fill="none" marker-end="url(#abc-arr)"/>
+              <text id="t-ab" x="178" y="214" class="abc-tag" transform="rotate(47 178 214)">ontwikkelrecht</text>
+              <text id="t-bc" x="382" y="230" class="abc-tag" transform="rotate(-47 382 230)">verkoop project</text>
+              <!-- notaris -->
+              <g id="g-not"><rect x="262" y="70" width="76" height="44" rx="2" fill="#03241E" stroke="#C5A45F" stroke-width="1.4"/><text x="300" y="97" class="abc-lbl" text-anchor="middle">NOTARIS</text></g>
+              <!-- knopen -->
+              <g id="n-a"><rect x="40" y="56" width="110" height="72" rx="2" fill="#0B3A31" stroke="#EDE6D6" stroke-width="1.2"/><text x="95" y="88" class="abc-big" text-anchor="middle">A</text><text x="95" y="112" class="abc-lbl" text-anchor="middle">GRONDEIGENAAR</text></g>
+              <g id="n-b"><rect x="245" y="262" width="110" height="72" rx="2" fill="#0B3A31" stroke="#C5A45F" stroke-width="1.6"/><text x="300" y="294" class="abc-big" text-anchor="middle" fill="#C5A45F">B</text><text x="300" y="318" class="abc-lbl" text-anchor="middle">PLANNOVA</text></g>
+              <g id="n-c"><rect x="450" y="56" width="110" height="72" rx="2" fill="#0B3A31" stroke="#EDE6D6" stroke-width="1.2"/><text x="505" y="88" class="abc-big" text-anchor="middle">C</text><text x="505" y="112" class="abc-lbl" text-anchor="middle">KOPER</text></g>
+              <!-- plan onder B -->
+              <g id="g-plan">
+                <rect x="372" y="276" width="14" height="14" fill="none" stroke="#C5A45F"/><path id="c1" d="M375 283l3 3 6-7" stroke="#C5A45F" stroke-width="1.8" fill="none"/><text x="394" y="288" class="abc-lbl2">PLAN</text>
+                <rect x="372" y="298" width="14" height="14" fill="none" stroke="#C5A45F"/><path id="c2" d="M375 305l3 3 6-7" stroke="#C5A45F" stroke-width="1.8" fill="none"/><text x="394" y="310" class="abc-lbl2">VERGUNNING</text>
+                <rect x="372" y="320" width="14" height="14" fill="none" stroke="#C5A45F"/><path id="c3" d="M375 327l3 3 6-7" stroke="#C5A45F" stroke-width="1.8" fill="none"/><text x="394" y="332" class="abc-lbl2">HAALBAARHEID</text>
+              </g>
+              <!-- kavel-token -->
+              <g id="tok"><rect x="-13" y="-13" width="26" height="26" fill="rgba(197,164,95,.25)" stroke="#C5A45F" stroke-width="1.6"/><path d="M-13 0H13M0 -13V13" stroke="#C5A45F" stroke-width=".8"/></g>
+            </svg>
+            <figcaption class="abc-cap" id="abc-cap">A blijft eigenaar · B krijgt het <b>ontwikkelrecht</b></figcaption>
+          </figure>
+        </div>
       </div>
     </div>
   </section>
@@ -743,6 +831,43 @@ document.querySelectorAll('.drop a').forEach(a=>a.addEventListener('click',()=>a
       .then(function(r){ if(!r.ok) throw new Error(r.status); done(); })
       .catch(function(){ btn.disabled=false; msg.className='form-msg bad'; msg.textContent='Versturen is niet gelukt. Probeer het opnieuw of mail ons op info@planovabv.nl.'; });
   });
+})();
+
+(function(){
+  var sc=document.getElementById('abc-scroll'); if(!sc) return;
+  var steps=[].slice.call(document.querySelectorAll('#abc-steps li')), cap=document.getElementById('abc-cap');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(id){return document.getElementById(id)}
+  var lab=$('l-ab'), lbc=$('l-bc'), lac=$('l-ac'), plan=$('g-plan'), not=$('g-not'), tok=$('tok'), nc=$('n-c'), tab=$('t-ab'), tbc=$('t-bc');
+  var checks=[$('c1'),$('c2'),$('c3')];
+  [lab,lbc,lac].concat(checks).forEach(function(el){var L=el.getTotalLength(); el.style.strokeDasharray=L; el.dataset.len=L;});
+  function cl(v){return v<0?0:v>1?1:v}
+  function seg(p,a,b){return cl((p-a)/(b-a))}
+  function draw(el,f){el.style.strokeDashoffset=(1-f)*el.dataset.len}
+  var caps=['A blijft eigenaar · B krijgt het <b>ontwikkelrecht</b>','B werkt het plan uit · <b>plan, vergunning, haalbaarheid</b>','B vindt een <b>koper (C)</b> voor het project','Eén akte · grond gaat <b>direct van A naar C</b>'];
+  var last=-1;
+  function render(p){
+    var s=Math.min(3,Math.floor(p*4));
+    if(s!==last){last=s; steps.forEach(function(li,i){li.classList.toggle('on',i===s);li.classList.toggle('done',i<s)}); cap.innerHTML=caps[s];}
+    draw(lab,seg(p,.02,.18)); tab.style.opacity=seg(p,.12,.2);
+    plan.style.opacity=seg(p,.25,.3); checks.forEach(function(c,i){draw(c,seg(p,.3+i*.05,.34+i*.05))});
+    draw(lbc,seg(p,.52,.68)); tbc.style.opacity=seg(p,.62,.7); nc.style.opacity=.35+.65*seg(p,.5,.6);
+    var f=seg(p,.75,.82); not.style.opacity=f; lac.style.opacity=seg(p,.79,.81); draw(lac,seg(p,.8,.95));
+    var m=seg(p,.82,.97), pts=[[95,150],[175,150],[175,92],[425,92],[425,150],[505,150]], tot=0, ls=[];
+    for(var k=1;k<pts.length;k++){var dl=Math.abs(pts[k][0]-pts[k-1][0])+Math.abs(pts[k][1]-pts[k-1][1]); ls.push(dl); tot+=dl;}
+    var want=m*tot, px=pts[0][0], py=pts[0][1];
+    for(var k=1;k<pts.length;k++){ if(want<=ls[k-1]){var q=want/ls[k-1]; px=pts[k-1][0]+(pts[k][0]-pts[k-1][0])*q; py=pts[k-1][1]+(pts[k][1]-pts[k-1][1])*q; break;} want-=ls[k-1]; px=pts[k][0]; py=pts[k][1]; }
+    tok.setAttribute('transform','translate('+px+' '+py+')');
+    tok.style.opacity=p<.78?seg(p,0,.06):1;
+    var dashed=p>.85; lab.style.strokeDasharray=dashed?'5 5':lab.dataset.len; lbc.style.strokeDasharray=dashed?'5 5':lbc.dataset.len;
+    if(dashed){lab.style.strokeDashoffset=0;lbc.style.strokeDashoffset=0;}
+  }
+  var cur=reduce?1:0, target=cur, raf=0;
+  function measure(){ if(reduce){target=1;return;} var r=sc.getBoundingClientRect(), span=r.height-innerHeight; target=span>0?cl(-r.top/span):1; }
+  function tick(){ raf=0; var d=target-cur; cur=Math.abs(d)<.001?target:cur+d*.18; render(cur); if(cur!==target) raf=requestAnimationFrame(tick); }
+  function kick(){ measure(); if(!raf) raf=requestAnimationFrame(tick); }
+  addEventListener('scroll',kick,{passive:true}); addEventListener('resize',kick);
+  measure(); cur=target; render(cur);
 })();
 </script>
 </body>
