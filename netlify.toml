@@ -22,3 +22,10 @@
 
 # Doorverwijzing tussen planovabv.nl en www.planovabv.nl regelt Netlify zelf
 # via het primaire domein (Domain management). Hier geen redirect toevoegen.
+
+# Contactkaarten (vCard) voor de QR-code op de visitekaartjes
+[[headers]]
+  for = "/contact/*.vcf"
+  [headers.values]
+    Content-Type = "text/vcard; charset=utf-8"
+    Cache-Control = "public, max-age=3600"
