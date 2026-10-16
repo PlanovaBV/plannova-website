@@ -391,7 +391,7 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
           <ol class="abc-steps" id="abc-steps">
             <li class="on"><span class="k">Stap 1 · A en B</span><h3>Afspraak over het ontwikkelrecht</h3><p>U en PlanNova leggen vast dat wij uw locatie mogen ontwikkelen, en onder welke voorwaarden de grond straks wordt geleverd. U blijft eigenaar.</p></li>
             <li><span class="k">Stap 2 · B</span><h3>Wij werken het plan uit</h3><p>PlanNova onderzoekt de mogelijkheden, maakt het plan en regelt de vergunning. Het werk en het risico van deze fase liggen bij ons.</p></li>
-            <li><span class="k">Stap 3 · B en C</span><h3>Een koper voor het project</h3><p>Voor het uitgewerkte plan zoeken we de partij die het project afneemt: de koper (C), bijvoorbeeld een belegger of bouwpartner.</p></li>
+            <li><span class="k">Stap 3 · B en C</span><h3>Wij maken het project koopklaar</h3><p>Met het plan, de vergunning en de afspraken met de eigenaar zorgt PlanNova ervoor dat de koper (C) het project kan kopen, bijvoorbeeld een belegger of bouwpartner.</p></li>
             <li><span class="k">Stap 4 · A naar C</span><h3>Eén levering bij de notaris</h3><p>De notaris levert de grond in één akte rechtstreeks van u aan de koper. U ontvangt de afgesproken prijs; de grond wisselt maar één keer van eigenaar.</p></li>
           </ol>
           <figure class="abc-visual" style="margin:0">
@@ -404,7 +404,7 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
               <path id="l-bc" class="abc-line" d="M338 262 L462 128" stroke="#C5A45F" stroke-width="2" fill="none"/>
               <path id="l-ac" class="abc-line" d="M150 92 L450 92" stroke="#EDE6D6" stroke-width="2.4" fill="none" marker-end="url(#abc-arr)"/>
               <text id="t-ab" x="178" y="214" class="abc-tag" transform="rotate(47 178 214)">ontwikkelrecht</text>
-              <text id="t-bc" x="382" y="230" class="abc-tag" transform="rotate(-47 382 230)">verkoop project</text>
+              <text id="t-bc" x="376" y="236" class="abc-tag" transform="rotate(-47 376 236)">koopklaar plan</text>
               <!-- notaris -->
               <g id="g-not"><rect x="262" y="70" width="76" height="44" rx="2" fill="#03241E" stroke="#C5A45F" stroke-width="1.4"/><text x="300" y="97" class="abc-lbl" text-anchor="middle">NOTARIS</text></g>
               <!-- knopen -->
@@ -417,6 +417,7 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
                 <rect x="372" y="298" width="14" height="14" fill="none" stroke="#C5A45F"/><path id="c2" d="M375 305l3 3 6-7" stroke="#C5A45F" stroke-width="1.8" fill="none"/><text x="394" y="310" class="abc-lbl2">VERGUNNING</text>
                 <rect x="372" y="320" width="14" height="14" fill="none" stroke="#C5A45F"/><path id="c3" d="M375 327l3 3 6-7" stroke="#C5A45F" stroke-width="1.8" fill="none"/><text x="394" y="332" class="abc-lbl2">HAALBAARHEID</text>
               </g>
+              <g id="pkg" style="opacity:0"><rect x="-14" y="-17" width="28" height="34" rx="1.5" fill="#EDE6D6"/><path d="M-8 -8H8M-8 -2H8M-8 4H3" stroke="#0B3A31" stroke-width="1.6"/><circle cx="8" cy="10" r="6" fill="#C5A45F"/><path d="M5 10l2 2 4-4" stroke="#03241E" stroke-width="1.6" fill="none"/></g>
               <!-- kavel-token -->
               <g id="tok"><rect x="-13" y="-13" width="26" height="26" fill="rgba(197,164,95,.25)" stroke="#C5A45F" stroke-width="1.6"/><path d="M-13 0H13M0 -13V13" stroke="#C5A45F" stroke-width=".8"/></g>
             </svg>
@@ -838,13 +839,13 @@ document.querySelectorAll('.drop a').forEach(a=>a.addEventListener('click',()=>a
   var steps=[].slice.call(document.querySelectorAll('#abc-steps li')), cap=document.getElementById('abc-cap');
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   function $(id){return document.getElementById(id)}
-  var lab=$('l-ab'), lbc=$('l-bc'), lac=$('l-ac'), plan=$('g-plan'), not=$('g-not'), tok=$('tok'), nc=$('n-c'), tab=$('t-ab'), tbc=$('t-bc');
+  var pkg=$('pkg'), lab=$('l-ab'), lbc=$('l-bc'), lac=$('l-ac'), plan=$('g-plan'), not=$('g-not'), tok=$('tok'), nc=$('n-c'), tab=$('t-ab'), tbc=$('t-bc');
   var checks=[$('c1'),$('c2'),$('c3')];
   [lab,lbc,lac].concat(checks).forEach(function(el){var L=el.getTotalLength(); el.style.strokeDasharray=L; el.dataset.len=L;});
   function cl(v){return v<0?0:v>1?1:v}
   function seg(p,a,b){return cl((p-a)/(b-a))}
   function draw(el,f){el.style.strokeDashoffset=(1-f)*el.dataset.len}
-  var caps=['A blijft eigenaar · B krijgt het <b>ontwikkelrecht</b>','B werkt het plan uit · <b>plan, vergunning, haalbaarheid</b>','B vindt een <b>koper (C)</b> voor het project','Eén akte · grond gaat <b>direct van A naar C</b>'];
+  var caps=['A blijft eigenaar · B krijgt het <b>ontwikkelrecht</b>','B werkt het plan uit · <b>plan, vergunning, haalbaarheid</b>','B maakt het project <b>koopklaar</b> voor C','Eén akte · grond gaat <b>direct van A naar C</b>'];
   var last=-1;
   function render(p){
     var s=Math.min(3,Math.floor(p*4));
@@ -853,11 +854,10 @@ document.querySelectorAll('.drop a').forEach(a=>a.addEventListener('click',()=>a
     plan.style.opacity=seg(p,.25,.3); checks.forEach(function(c,i){draw(c,seg(p,.3+i*.05,.34+i*.05))});
     draw(lbc,seg(p,.52,.68)); tbc.style.opacity=seg(p,.62,.7); nc.style.opacity=.35+.65*seg(p,.5,.6);
     var f=seg(p,.75,.82); not.style.opacity=f; lac.style.opacity=seg(p,.79,.81); draw(lac,seg(p,.8,.95));
-    var m=seg(p,.82,.97), pts=[[95,150],[175,150],[175,92],[425,92],[425,150],[505,150]], tot=0, ls=[];
-    for(var k=1;k<pts.length;k++){var dl=Math.abs(pts[k][0]-pts[k-1][0])+Math.abs(pts[k][1]-pts[k-1][1]); ls.push(dl); tot+=dl;}
-    var want=m*tot, px=pts[0][0], py=pts[0][1];
-    for(var k=1;k<pts.length;k++){ if(want<=ls[k-1]){var q=want/ls[k-1]; px=pts[k-1][0]+(pts[k][0]-pts[k-1][0])*q; py=pts[k-1][1]+(pts[k][1]-pts[k-1][1])*q; break;} want-=ls[k-1]; px=pts[k][0]; py=pts[k][1]; }
-    tok.setAttribute('transform','translate('+px+' '+py+')');
+    var m=seg(p,.82,.97), em=m<.5?2*m*m:1-Math.pow(-2*m+2,2)/2;
+    tok.setAttribute('transform','translate('+(95+(505-95)*em)+' 150)');
+    var k=seg(p,.52,.68);
+    pkg.setAttribute('transform','translate('+(338+(470-338)*k)+' '+(262+(140-262)*k)+')'); pkg.style.opacity=seg(p,.52,.55)*(1-seg(p,.8,.84));
     tok.style.opacity=p<.78?seg(p,0,.06):1;
     var dashed=p>.85; lab.style.strokeDasharray=dashed?'5 5':lab.dataset.len; lbc.style.strokeDasharray=dashed?'5 5':lbc.dataset.len;
     if(dashed){lab.style.strokeDashoffset=0;lbc.style.strokeDashoffset=0;}
