@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Portaal · PlanNova</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<style>
+@font-face{font-family:"Urbanist";font-weight:600;font-display:swap;src:url("/assets/fonts/urbanist-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Public Sans";font-weight:400;font-display:swap;src:url("/assets/fonts/public-sans-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Public Sans";font-weight:600;font-display:swap;src:url("/assets/fonts/public-sans-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-weight:500;font-display:swap;src:url("/assets/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2")}
+/* Layout: plain working page; header with user + logout, greeting, a grid of shortcut tiles, then a short 'binnenkort' list. Brand tokens match the public site. */
+:root{
+  --green:#03241E;--green-3:#164b40;--gold:#C5A45F;--gold-deep:#8E7337;
+  --sand:#EDE6D6;--paper:#F6F3EC;--line:#D6CCB4;--muted:#4F6560;
+  --display:"Urbanist","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --body:"Public Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--green);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1080px;margin-inline:auto;padding-inline:clamp(16px,4vw,40px)}
+header{background:var(--green);color:var(--sand)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:14px;flex-wrap:wrap}
+header img{height:32px;width:auto;display:block}
+.who{display:flex;align-items:center;gap:16px;font-size:14px;min-width:0}
+.who span{color:#A9B8AE;overflow-wrap:anywhere}
+.who a{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:1px solid var(--green-3);padding:10px 14px;border-radius:2px}
+.who a:hover{border-color:var(--gold);color:var(--gold)}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep)}
+h1{font:600 clamp(34px,5vw,54px)/1.05 var(--display);letter-spacing:-.015em;margin:14px 0 10px}
+h2{font:600 24px/1.2 var(--display);margin:0 0 18px}
+.intro{color:var(--muted);max-width:36em}
+main{padding-block:clamp(40px,6vw,72px)}
+.tiles{list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.tiles a{display:flex;flex-direction:column;gap:8px;height:100%;background:#fff;border-top:2px solid var(--green);padding:20px 22px 22px;text-decoration:none;transition:border-color .15s,transform .15s}
+.tiles a:hover{border-top-color:var(--gold);transform:translateY(-2px)}
+.tiles b{font:600 19px/1.2 var(--display)}
+.tiles small{color:var(--muted);font-size:14.5px;line-height:1.5}
+.tiles .tag{font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep)}
+.soon{margin-top:56px;padding-top:28px;border-top:1px solid var(--line)}
+.soon ul{margin:0;padding-left:1.1em;color:var(--muted);display:grid;gap:6px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a href="/" aria-label="Naar planovabv.nl"><img src="/assets/logo-light.png" alt="PlanNova BV Projectontwikkeling" width="900" height="193"></a>
+    <div class="who"><span>{{EMAIL}}</span><a href="/auth/logout">Uitloggen</a></div>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <p class="eyebrow">Portaal</p>
+    <h1>Welkom, {{VOORNAAM}}.</h1>
+    <p class="intro">Dit is de afgeschermde werkplek van PlanNova. Alleen Bram en Tom kunnen hier inloggen, met hun Microsoft 365-account.</p>
+
+    <ul class="tiles">
+      <li><a href="https://outlook.office.com/mail/" target="_blank" rel="noopener"><span class="tag">Microsoft 365</span><b>Outlook</b><small>Mail en agenda van planovabv.nl.</small></a></li>
+      <li><a href="https://teams.microsoft.com/" target="_blank" rel="noopener"><span class="tag">Microsoft 365</span><b>Teams</b><small>Chat en overleg tussen Bram en Tom.</small></a></li>
+      <li><a href="https://www.office.com/launch/sharepoint" target="_blank" rel="noopener"><span class="tag">Microsoft 365</span><b>SharePoint</b><small>Gedeelde documenten en projectmappen.</small></a></li>
+      <li><a href="https://app.netlify.com/projects/planovabv/forms" target="_blank" rel="noopener"><span class="tag">Website</span><b>Contactberichten</b><small>Berichten die via het formulier op de site binnenkomen.</small></a></li>
+      <li><a href="https://github.com/PlanovaBV/plannova-website" target="_blank" rel="noopener"><span class="tag">Website</span><b>Broncode</b><small>De bestanden van planovabv.nl in GitHub.</small></a></li>
+      <li><a href="/" ><span class="tag">Website</span><b>planovabv.nl</b><small>De openbare website bekijken.</small></a></li>
+    </ul>
+
+    <section class="soon" aria-labelledby="soon-h">
+      <h2 id="soon-h">Nog te bouwen</h2>
+      <ul>
+        <li>Wat er in het portaal komt, bepalen jullie. Denk aan een projectoverzicht, haalbaarheidsberekeningen of een overzicht van binnengekomen aanvragen.</li>
+      </ul>
+    </section>
+  </div>
+</main>
+</body>
+</html>
