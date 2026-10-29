@@ -197,17 +197,26 @@ p{margin:0}
 .abc-tag{font:500 10.5px var(--mono);letter-spacing:.06em;fill:#C5A45F}
 /* Process */
 .process{background:var(--sand);padding-block:clamp(64px,8vw,104px)}
-.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr 64px 1fr 1fr;gap:0;counter-reset:s}
 .step{padding:28px 26px 30px;border-left:1px solid var(--sand-2);display:flex;flex-direction:column;gap:12px;min-width:0;counter-increment:s}
 .step:first-child{border-left:0;padding-left:0}
+.milestone+.step{border-left:0}
+.milestone{position:relative;display:flex;flex-direction:column;align-items:center;padding-block:22px}
+.ms-line{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--gold);transform:translateX(-50%)}
+.ms-dia{position:relative;width:16px;height:16px;background:var(--gold);transform:rotate(45deg);box-shadow:0 0 0 6px var(--sand);margin-top:10px;flex:none}
+.ms-text{position:relative;writing-mode:vertical-rl;transform:rotate(180deg);font:500 11.5px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--green);background:var(--sand);padding:14px 4px;margin-top:20px;white-space:nowrap}
 .step .n{font:500 13px/1 var(--mono);color:var(--gold-deep)}
 .step .n::before{content:"Fase " counter(s)}
 .step h3{font-size:24px}
 .step p{color:var(--muted);font-size:16px}
 .ai{margin-top:auto;padding-top:14px;border-top:1px dashed var(--line);font-size:14.5px;line-height:1.55;color:var(--ink)}
 .ai b{display:block;font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:8px}
-@media (max-width:1000px){.steps{grid-template-columns:repeat(2,1fr)}.step:nth-child(3){border-left:0;padding-left:0}.step{padding-bottom:40px}}
-@media (max-width:600px){.steps{grid-template-columns:1fr}.step{border-left:0;padding-left:0;border-top:1px solid var(--sand-2)}}
+@media (max-width:1000px){.steps{grid-template-columns:repeat(2,1fr)}.milestone+.step{border-left:0;padding-left:0}.step{padding-bottom:40px}
+  .milestone{grid-column:1/-1;flex-direction:row;align-items:center;gap:16px;padding:6px 0 18px}
+  .ms-line{top:calc(50% - 6px);bottom:auto;left:0;right:0;width:auto;height:2px;transform:none}
+  .ms-dia{margin:0 0 0 2px;box-shadow:0 0 0 12px var(--sand)}
+  .ms-text{writing-mode:horizontal-tb;transform:none;padding:0 12px 0 4px;margin:0}}
+@media (max-width:600px){.steps{grid-template-columns:1fr}.step{border-left:0;padding-left:0;border-top:1px solid var(--sand-2)}.milestone{padding:14px 0}.ms-line{top:50%}.milestone+.step{border-top:0}.ms-text{white-space:normal}}
 
 /* Thesis band */
 .thesis{background:var(--green);color:var(--on-green);padding-block:clamp(72px,9vw,120px);overflow:hidden;position:relative}
@@ -460,6 +469,11 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
           <span class="n"></span>
           <h3>Haalbaarheid</h3>
           <p>Welke invulling past bij de locatie en is financieel haalbaar? We vergelijken de mogelijkheden en brengen kosten, verwachte opbrengsten en risico’s in beeld.</p>
+        </li>
+        <li class="milestone" aria-label="Mijlpaal na fase 2: koop- en ontwikkelovereenkomst">
+          <span class="ms-line" aria-hidden="true"></span>
+          <span class="ms-dia" aria-hidden="true"></span>
+          <span class="ms-text">Koop- en ontwikkelovereenkomst</span>
         </li>
         <li class="step">
           <span class="n"></span>
