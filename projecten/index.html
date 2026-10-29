@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Projecten · PlanNova Projectontwikkeling</title>
+<meta name="description" content="Een overzicht van de woonprojecten van PlanNova: in voorbereiding, in aanbouw en opgeleverd.">
+<meta name="theme-color" content="#03241E">
+<link rel="canonical" href="https://www.planovabv.nl/projecten/">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/assets/favicon-48.png" sizes="48x48">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="nl_NL">
+<meta property="og:site_name" content="PlanNova">
+<meta property="og:title" content="Projecten · PlanNova">
+<meta property="og:description" content="Een overzicht van de woonprojecten van PlanNova.">
+<meta property="og:url" content="https://www.planovabv.nl/projecten/">
+<meta property="og:image" content="https://www.planovabv.nl/assets/og-image.jpg">
+<link rel="preload" href="/assets/fonts/urbanist-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Urbanist";font-weight:600;font-display:swap;src:url("/assets/fonts/urbanist-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Public Sans";font-weight:400;font-display:swap;src:url("/assets/fonts/public-sans-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Public Sans";font-weight:500;font-display:swap;src:url("/assets/fonts/public-sans-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Public Sans";font-weight:600;font-display:swap;src:url("/assets/fonts/public-sans-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-weight:500;font-display:swap;src:url("/assets/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2")}
+/* Layout: same header/footer as the homepage. Intro block, status filter, then a 3-column grid of project cards (photo, status, title, place). A card opens a full-screen project view with photo gallery and description; the URL hash keeps it shareable. Contact band at the end. */
+:root{
+  --green:#03241E;--green-2:#0B3A31;--green-3:#164b40;
+  --gold:#C5A45F;--gold-deep:#8E7337;
+  --sand:#EDE6D6;--sand-2:#E2D8C2;--paper:#F6F3EC;
+  --ink:#03241E;--muted:#4F6560;--line:#D6CCB4;
+  --on-green:#EDE6D6;--on-green-muted:#A9B8AE;
+  --display:"Urbanist","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --body:"Public Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --wrap:1180px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--body);-webkit-font-smoothing:antialiased}
+body.lock{overflow:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:clamp(16px,4vw,40px)}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.08;letter-spacing:-.015em;margin:0;text-wrap:balance}
+p{margin:0}
+.eyebrow{font:500 12px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep)}
+
+/* Header (gelijk aan homepage) */
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:14px;position:relative}
+.brand img{height:38px;width:auto;display:block}
+.nav{display:flex;gap:28px;align-items:center}
+.nav a{text-decoration:none;font:500 15px/1 var(--body);color:var(--muted);transition:color .15s}
+.nav a:hover,.nav a[aria-current]{color:var(--ink)}
+.nav a[aria-current]{text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:8px;text-decoration-thickness:2px}
+.nav .btn-sm{color:var(--paper);background:var(--green);padding:11px 18px;border-radius:2px}
+.nav .btn-sm:hover{color:var(--paper);background:var(--green-3)}
+.menu{display:none}
+.menu summary{list-style:none;cursor:pointer;font:500 14px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:10px 0}
+.menu summary::-webkit-details-marker{display:none}
+.menu[open] .drop{display:flex}
+.drop{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;background:var(--paper);border-bottom:1px solid var(--line);padding:8px clamp(16px,4vw,40px) 20px}
+.drop a{padding:12px 0;border-bottom:1px solid var(--line);text-decoration:none;font-weight:500}
+@media (max-width:900px){.nav{display:none}.menu{display:block}.brand img{height:32px}}
+
+/* Intro */
+.intro{padding-block:clamp(48px,7vw,88px) clamp(28px,4vw,44px)}
+.intro .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,64px);align-items:end}
+.intro h1{font-size:clamp(40px,5.6vw,72px);margin-top:16px}
+.intro p.lede{color:var(--muted);max-width:34em;font-size:clamp(17px,1.4vw,19px)}
+@media (max-width:800px){.intro .wrap{grid-template-columns:1fr}}
+
+.filters{display:flex;flex-wrap:wrap;gap:8px;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.filters button{font:500 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:11px 14px;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:2px;cursor:pointer}
+.filters button:hover{border-color:var(--green);color:var(--green)}
+.filters button[aria-pressed=true]{background:var(--green);border-color:var(--green);color:var(--sand)}
+.filters span{opacity:.65;margin-left:6px}
+
+/* Kaarten */
+.grid{list-style:none;margin:0;padding:clamp(28px,4vw,44px) 0 clamp(64px,8vw,104px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.4vw,32px) clamp(16px,2vw,24px)}
+@media (max-width:980px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.grid{grid-template-columns:1fr}}
+.card{display:block;text-decoration:none;color:inherit;cursor:pointer;background:none;border:0;padding:0;text-align:left;font:inherit;width:100%}
+.card .ph{position:relative;aspect-ratio:4/3;background:var(--sand);overflow:hidden}
+.card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.card:hover img{transform:scale(1.035)}
+.card .tag{position:absolute;left:12px;top:12px;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;background:var(--paper);color:var(--green);padding:7px 9px;border-radius:2px}
+.card .tag.opgeleverd{background:var(--green);color:var(--sand)}
+.card .tag.in-aanbouw{background:var(--gold);color:var(--green)}
+.card .noph{position:absolute;inset:0;display:grid;place-items:center;color:var(--gold-deep)}
+.card .noph svg{width:42%;height:auto;opacity:.55}
+.card h3{font-size:22px;margin-top:16px}
+.card .meta{display:block;margin-top:6px;color:var(--muted);font-size:15px}
+.card .more{display:inline-block;margin-top:10px;font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep)}
+.card:hover .more{color:var(--green)}
+.leeg{padding:clamp(40px,6vw,72px) 0 clamp(64px,8vw,104px);color:var(--muted);max-width:34em}
+.leeg h2{font-size:clamp(26px,3vw,34px);color:var(--ink);margin-bottom:12px}
+.leeg a{color:var(--ink)}
+
+/* Projectweergave */
+.view{position:fixed;inset:0;z-index:50;background:var(--paper);overflow-y:auto;overscroll-behavior:contain}
+.view .bar{position:sticky;top:0;z-index:2;background:color-mix(in srgb,var(--paper) 94%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.view .bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.view .bar .eyebrow{color:var(--muted)}
+.close{display:inline-flex;align-items:center;gap:8px;font:600 15px/1 var(--body);padding:12px 16px;border:1px solid var(--green);background:transparent;color:var(--green);border-radius:2px;cursor:pointer}
+.close:hover{background:var(--sand)}
+.view .body{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);padding-block:clamp(24px,4vw,48px) 80px}
+@media (max-width:900px){.view .body{grid-template-columns:1fr}}
+.stage{position:relative;background:var(--green);aspect-ratio:3/2}
+.stage img{width:100%;height:100%;object-fit:contain;display:block}
+.stage .nav-btn{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border:0;border-radius:2px;background:rgba(246,243,236,.92);color:var(--green);font:600 20px/1 var(--body);cursor:pointer}
+.stage .nav-btn:hover{background:#fff}
+.stage .prev{left:12px}.stage .next{right:12px}
+.stage .count{position:absolute;right:12px;bottom:12px;font:500 11px/1 var(--mono);letter-spacing:.1em;background:rgba(3,36,30,.75);color:var(--sand);padding:6px 8px}
+.thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto;padding-bottom:4px}
+.thumbs button{flex:0 0 88px;aspect-ratio:4/3;padding:0;border:2px solid transparent;background:var(--sand);cursor:pointer;opacity:.7}
+.thumbs button[aria-current=true]{border-color:var(--gold);opacity:1}
+.thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.info h2{font-size:clamp(30px,3.6vw,44px);margin-top:14px}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:10px 24px;margin:26px 0 0;padding:20px 0;border-block:1px solid var(--line)}
+.facts dt{font:500 12px/1.9 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gold-deep)}
+.facts dd{margin:0}
+.desc p{color:var(--muted);margin-top:16px;max-width:36em}
+.info .btn{margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:600 15px/1 var(--body);padding:16px 22px;border-radius:2px;border:1px solid var(--green);background:var(--green);color:var(--paper);transition:background .15s}
+.btn:hover{background:var(--green-3);border-color:var(--green-3)}
+.btn .arr{transition:transform .2s}
+.btn:hover .arr{transform:translateX(3px)}
+
+/* Contactband */
+.cta{background:var(--green);color:var(--on-green);padding-block:clamp(48px,6vw,80px)}
+.cta .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.cta h2{font-size:clamp(28px,3.4vw,42px);max-width:16em}
+.cta .eyebrow{color:var(--gold)}
+.cta .btn{background:var(--gold);border-color:var(--gold);color:var(--green)}
+.cta .btn:hover{background:#d4b676;border-color:#d4b676}
+footer{background:var(--green);color:var(--on-green-muted);padding-block:44px;font-size:14px;border-top:1px solid var(--green-3)}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+footer img{height:34px;width:auto;display:block}
+footer .legal{font:400 12.5px/1.6 var(--mono)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="PlanNova, naar de homepage"><img src="/assets/logo-dark.png" alt="PlanNova BV Projectontwikkeling" width="900" height="193"></a>
+    <nav class="nav" aria-label="Hoofdmenu">
+      <a href="/#werkwijze">Werkwijze</a>
+      <a href="/#voor-wie">Voor wie</a>
+      <a href="/projecten/" aria-current="page">Projecten</a>
+      <a href="/#over-ons">Over ons</a>
+      <a class="btn-sm" href="/#contact">Contact</a>
+    </nav>
+    <details class="menu">
+      <summary aria-label="Menu openen">Menu</summary>
+      <div class="drop">
+        <a href="/#werkwijze">Werkwijze</a>
+        <a href="/#voor-wie">Voor wie</a>
+        <a href="/projecten/" aria-current="page">Projecten</a>
+        <a href="/#over-ons">Over ons</a>
+        <a href="/#contact">Contact</a>
+      </div>
+    </details>
+  </div>
+</header>
+
+<main>
+  <section class="intro">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Projecten</p>
+        <h1>Van locatie tot woning.</h1>
+      </div>
+      <p class="lede">Een overzicht van de projecten waar PlanNova aan werkt: van plannen in voorbereiding tot woningen die zijn opgeleverd.</p>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="filters" id="filters" role="group" aria-label="Filter op status" hidden></div>
+    <ul class="grid" id="grid" aria-live="polite"></ul>
+    <div class="leeg" id="leeg" hidden>
+      <h2>Binnenkort meer.</h2>
+      <p>We zetten hier binnenkort onze eerste projecten. Heeft u een locatie met potentie? <a href="/#contact">Neem contact met ons op</a>.</p>
+    </div>
+  </div>
+
+  <section class="cta">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Uw locatie</p>
+        <h2>Ziet u mogelijkheden voor uw grond of pand?</h2>
+      </div>
+      <a class="btn" href="/#contact">Neem contact op <span class="arr" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</main>
+
+<div class="view" id="view" role="dialog" aria-modal="true" aria-labelledby="v-titel" hidden>
+  <div class="bar"><div class="wrap"><span class="eyebrow">Project</span><button class="close" id="v-close" type="button">Sluiten <span aria-hidden="true">✕</span></button></div></div>
+  <div class="wrap body">
+    <div>
+      <div class="stage" id="v-stage">
+        <img id="v-img" alt="">
+        <button class="nav-btn prev" id="v-prev" type="button" aria-label="Vorige foto">←</button>
+        <button class="nav-btn next" id="v-next" type="button" aria-label="Volgende foto">→</button>
+        <span class="count" id="v-count"></span>
+      </div>
+      <div class="thumbs" id="v-thumbs"></div>
+    </div>
+    <div class="info">
+      <p class="eyebrow" id="v-status"></p>
+      <h2 id="v-titel"></h2>
+      <dl class="facts" id="v-facts"></dl>
+      <div class="desc" id="v-desc"></div>
+      <a class="btn" href="/#contact">Interesse? Neem contact op <span class="arr" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <img src="/assets/logo-light.png" alt="PlanNova BV Projectontwikkeling" width="900" height="193">
+    <p class="legal">© 2026 PlanNova B.V. · KvK volgt</p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.drop a').forEach(function(a){a.addEventListener('click',function(){a.closest('details').removeAttribute('open')})});
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var NOPH='<span class="noph"><svg viewBox="0 0 100 70" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 66h84M18 66V34l22-18 22 18v32M62 66V44l15-12 15 12v22M32 66V50h16v16"/></svg></span>';
+  var lijst=[], filter='alle', huidig=null, idx=0, terug=null;
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function meta(p){return [p.plaats,p.woningen!=null?p.woningen+(p.woningen===1?' woning':' woningen'):''].filter(Boolean).join(' · ')}
+
+  function render(){
+    var g=$('grid'); g.innerHTML='';
+    lijst.filter(function(p){return filter==='alle'||p.status===filter}).forEach(function(p){
+      var li=document.createElement('li');
+      li.innerHTML='<a class="card" href="#'+esc(p.id)+'"><span class="ph">'+(p.fotos[0]?'<img src="'+esc(p.fotos[0])+'" alt="" loading="lazy" decoding="async">':NOPH)+
+        '<span class="tag '+esc(p.status)+'">'+esc(p.statusLabel)+'</span></span><h3>'+esc(p.titel)+'</h3><span class="meta">'+esc(meta(p))+'</span><span class="more">Bekijk project →</span></a>';
+      g.appendChild(li);
+    });
+  }
+  function filters(){
+    var f=$('filters'), opties=[['alle','Alle'],['in-voorbereiding','In voorbereiding'],['in-aanbouw','In aanbouw'],['opgeleverd','Opgeleverd']];
+    f.innerHTML='';
+    opties.forEach(function(o){
+      var n=o[0]==='alle'?lijst.length:lijst.filter(function(p){return p.status===o[0]}).length;
+      if(o[0]!=='alle'&&!n) return;
+      var b=document.createElement('button'); b.type='button';
+      b.setAttribute('aria-pressed',String(filter===o[0]));
+      b.innerHTML=esc(o[1])+'<span>'+n+'</span>';
+      b.onclick=function(){filter=o[0];filters();render()};
+      f.appendChild(b);
+    });
+    f.hidden=f.children.length<3;
+  }
+
+  // ---------- projectweergave ----------
+  function open(p){
+    huidig=p; idx=0;
+    $('v-status').textContent=p.statusLabel;
+    $('v-titel').textContent=p.titel;
+    var facts=[['Plaats',p.plaats],['Status',p.statusLabel],['Woningen',p.woningen!=null?String(p.woningen):'']].filter(function(f){return f[1]});
+    $('v-facts').innerHTML=facts.map(function(f){return '<dt>'+esc(f[0])+'</dt><dd>'+esc(f[1])+'</dd>'}).join('');
+    $('v-desc').innerHTML=(p.beschrijving||'').split(/\n\s*\n/).filter(function(t){return t.trim()}).map(function(t){return '<p>'+esc(t).replace(/\n/g,'<br>')+'</p>'}).join('');
+    var th=$('v-thumbs'); th.innerHTML='';
+    p.fotos.forEach(function(src,i){
+      var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label','Foto '+(i+1));
+      b.innerHTML='<img src="'+esc(src)+'" alt="" loading="lazy">'; b.onclick=function(){toon(i)}; th.appendChild(b);
+    });
+    th.hidden=p.fotos.length<2;
+    $('v-stage').hidden=!p.fotos.length;
+    toon(0);
+    if($('view').hidden){terug=document.activeElement;}
+    $('view').hidden=false; $('view').scrollTop=0; document.body.classList.add('lock');
+    document.title=p.titel+' · PlanNova';
+    $('v-close').focus();
+  }
+  function toon(i){
+    if(!huidig||!huidig.fotos.length) return;
+    var n=huidig.fotos.length; idx=(i+n)%n;
+    $('v-img').src=huidig.fotos[idx]; $('v-img').alt=huidig.titel+', foto '+(idx+1)+' van '+n;
+    $('v-count').textContent=(idx+1)+' / '+n;
+    $('v-prev').hidden=$('v-next').hidden=$('v-count').hidden=n<2;
+    Array.prototype.forEach.call($('v-thumbs').children,function(b,j){b.setAttribute('aria-current',String(j===idx))});
+  }
+  function sluit(){
+    $('view').hidden=true; document.body.classList.remove('lock'); huidig=null;
+    document.title='Projecten · PlanNova Projectontwikkeling';
+    if(terug&&terug.focus) terug.focus();
+  }
+  $('v-prev').onclick=function(){toon(idx-1)};
+  $('v-next').onclick=function(){toon(idx+1)};
+  $('v-close').onclick=function(){history.pushState('',document.title,location.pathname+location.search);sluit()};
+  document.addEventListener('keydown',function(e){
+    if($('view').hidden) return;
+    if(e.key==='Escape') $('v-close').click();
+    if(e.key==='ArrowLeft') toon(idx-1);
+    if(e.key==='ArrowRight') toon(idx+1);
+  });
+  var sx=null;
+  $('v-stage').addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+  $('v-stage').addEventListener('touchend',function(e){if(sx==null)return;var d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>40)toon(idx+(d<0?1:-1));sx=null});
+
+  function route(){
+    var id=location.hash.slice(1);
+    var p=id&&lijst.find(function(x){return x.id===id});
+    if(p) open(p); else if(!$('view').hidden) sluit();
+  }
+  window.addEventListener('hashchange',route);
+
+  fetch('/api/projecten').then(function(r){return r.ok?r.json():{projecten:[]}}).catch(function(){return {projecten:[]}}).then(function(d){
+    lijst=d.projecten||[];
+    $('leeg').hidden=lijst.length>0; $('grid').hidden=!lijst.length;
+    filters(); render(); route();
+  });
+})();
+</script>
+</body>
+</html>

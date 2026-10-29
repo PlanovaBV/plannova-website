@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Projecten beheren · PlanNova</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<style>
+@font-face{font-family:"Urbanist";font-weight:600;font-display:swap;src:url("/assets/fonts/urbanist-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Public Sans";font-weight:400;font-display:swap;src:url("/assets/fonts/public-sans-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Public Sans";font-weight:600;font-display:swap;src:url("/assets/fonts/public-sans-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-weight:500;font-display:swap;src:url("/assets/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2")}
+/* Layout: working screen. Header as on the portal; a list of project rows (thumbnail, title, status, published badge, actions); the editor replaces the list while open: fields on the left, photos on the right (stacked on phones). */
+:root{
+  --green:#03241E;--green-3:#164b40;--gold:#C5A45F;--gold-deep:#8E7337;
+  --sand:#EDE6D6;--paper:#F6F3EC;--line:#D6CCB4;--muted:#4F6560;--red:#9B2C1F;
+  --display:"Urbanist","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --body:"Public Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--paper);color:var(--green);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1080px;margin-inline:auto;padding-inline:clamp(16px,4vw,40px)}
+header{background:var(--green);color:var(--sand)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:14px;flex-wrap:wrap}
+header img{height:32px;width:auto;display:block}
+.who{display:flex;align-items:center;gap:16px;font-size:14px;min-width:0}
+.who span{color:#A9B8AE;overflow-wrap:anywhere}
+.who a{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:1px solid var(--green-3);padding:10px 14px;border-radius:2px}
+.who a:hover{border-color:var(--gold);color:var(--gold)}
+main{padding-block:clamp(32px,5vw,56px) 80px}
+.crumb{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep);text-decoration:none}
+.crumb:hover{color:var(--green)}
+.head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-top:14px}
+h1{font:600 clamp(32px,4.6vw,48px)/1.05 var(--display);letter-spacing:-.015em;margin:0}
+h2{font:600 26px/1.15 var(--display);margin:0}
+.intro{color:var(--muted);max-width:40em;margin:10px 0 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:2px;border:1px solid var(--green);background:var(--green);color:var(--paper);font:600 15px/1 var(--body);cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--green-3);border-color:var(--green-3)}
+.btn.ghost{background:transparent;color:var(--green)}
+.btn.ghost:hover{background:var(--sand)}
+.btn.danger{background:transparent;color:var(--red);border-color:#d8b7b1}
+.btn.danger:hover{background:#f6e7e4}
+.btn.sm{min-height:38px;padding:0 14px;font-size:14px}
+.btn[disabled]{opacity:.5;cursor:default}
+.msg{margin:22px 0 0;padding:14px 18px;background:#fff;border-left:3px solid var(--gold);color:var(--green)}
+.msg.err{border-left-color:var(--red)}
+
+/* lijst */
+.list{list-style:none;margin:32px 0 0;padding:0;display:grid;gap:10px}
+.row{display:grid;grid-template-columns:96px 1fr auto;gap:18px;align-items:center;background:#fff;padding:12px;border-top:2px solid var(--green)}
+.thumb{width:96px;aspect-ratio:4/3;background:var(--sand);object-fit:cover;display:block}
+.thumb.empty{display:grid;place-items:center;font:500 10px/1.2 var(--mono);letter-spacing:.1em;color:var(--muted);text-transform:uppercase;text-align:center}
+.row b{font:600 19px/1.2 var(--display);display:block}
+.row .meta{color:var(--muted);font-size:14.5px}
+.badge{display:inline-block;margin-top:6px;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:5px 8px;border-radius:2px}
+.badge.live{background:var(--green);color:var(--sand)}
+.badge.draft{background:var(--sand);color:var(--muted)}
+.row .acts{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.empty-state{margin-top:32px;padding:40px 24px;background:#fff;text-align:center;color:var(--muted);border-top:2px solid var(--green)}
+@media (max-width:640px){.row{grid-template-columns:72px 1fr}.thumb{width:72px}.row .acts{grid-column:1/-1;justify-content:stretch}.row .acts .btn{flex:1}}
+
+/* editor */
+.editor{margin-top:28px;background:#fff;border-top:2px solid var(--green);padding:clamp(18px,3vw,32px)}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,48px);margin-top:22px}
+@media (max-width:820px){.grid{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.field label,.lbl{font:500 12px/1.2 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gold-deep)}
+.field small{color:var(--muted);font:400 13px/1.4 var(--body);text-transform:none;letter-spacing:0}
+input[type=text],input[type=number],select,textarea{font:400 16px/1.4 var(--body);color:var(--green);background:var(--paper);border:1px solid var(--line);border-radius:2px;padding:12px 14px;width:100%}
+textarea{min-height:200px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:0;border-color:var(--gold)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pub{display:flex;gap:12px;align-items:flex-start;padding:16px;background:var(--paper);border:1px solid var(--line);margin-top:6px;cursor:pointer}
+.pub input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--green)}
+.pub span{display:block;color:var(--muted);font-size:14px}
+.photos{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.photo{position:relative;background:var(--sand)}
+.photo img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.photo .cover{position:absolute;left:6px;top:6px;font:500 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:var(--green);padding:5px 7px}
+.photo .ctrl{display:flex;gap:4px;padding:6px;background:#fff;border:1px solid var(--line);border-top:0}
+.photo .ctrl button{flex:1;min-height:34px;border:1px solid var(--line);background:var(--paper);color:var(--green);font:600 14px/1 var(--body);cursor:pointer;border-radius:2px}
+.photo .ctrl button:hover{border-color:var(--green)}
+.photo .ctrl button[disabled]{opacity:.35;cursor:default}
+.photo.busy img{opacity:.4}
+.photo.busy::after{content:"Bezig…";position:absolute;inset:0;display:grid;place-items:center;font:500 12px var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.drop{margin-top:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:120px;border:1.5px dashed var(--line);background:var(--paper);text-align:center;padding:18px;cursor:pointer;color:var(--muted);font-size:14.5px}
+.drop b{color:var(--green);font-weight:600}
+.drop.over{border-color:var(--gold);background:#fbf6ea}
+.drop input{position:absolute;width:1px;height:1px;opacity:0}
+.foot{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}
+.foot .grow{flex:1}
+.status{color:var(--muted);font-size:14.5px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a href="/" aria-label="Naar planovabv.nl"><img src="/assets/logo-light.png" alt="PlanNova BV Projectontwikkeling" width="900" height="193"></a>
+    <div class="who"><span>{{EMAIL}}</span><a href="/auth/logout">Uitloggen</a></div>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <a class="crumb" href="/portaal/">← Portaal</a>
+
+    <section id="lijst-view">
+      <div class="head">
+        <div>
+          <h1>Projecten</h1>
+          <p class="intro">Projecten met "Tonen op de website" aan staan op planovabv.nl/projecten. De vijf nieuwste staan ook onderaan de homepage.</p>
+        </div>
+        <button class="btn" id="nieuw" type="button">+ Nieuw project</button>
+      </div>
+      <p class="msg" id="lijst-msg" role="status" hidden></p>
+      <ul class="list" id="lijst"></ul>
+      <div class="empty-state" id="leeg" hidden>Nog geen projecten. Klik op "Nieuw project" om te beginnen.</div>
+    </section>
+
+    <section id="edit-view" hidden>
+      <div class="head"><h1 id="edit-h">Nieuw project</h1></div>
+      <form class="editor" id="form" novalidate>
+        <div class="grid">
+          <div>
+            <div class="field">
+              <label for="f-titel">Titel</label>
+              <input id="f-titel" type="text" maxlength="120" required placeholder="Bijvoorbeeld: Vier rijwoningen aan de Kerkstraat">
+            </div>
+            <div class="two">
+              <div class="field">
+                <label for="f-plaats">Plaats</label>
+                <input id="f-plaats" type="text" maxlength="80" placeholder="Bladel">
+              </div>
+              <div class="field">
+                <label for="f-woningen">Aantal woningen</label>
+                <input id="f-woningen" type="number" min="0" step="1" inputmode="numeric">
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-status">Status</label>
+              <select id="f-status">
+                <option value="in-voorbereiding">In voorbereiding</option>
+                <option value="in-aanbouw">In aanbouw</option>
+                <option value="opgeleverd">Opgeleverd</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-beschrijving">Beschrijving <small>Een witregel maakt een nieuwe alinea.</small></label>
+              <textarea id="f-beschrijving" maxlength="6000"></textarea>
+            </div>
+          </div>
+          <div>
+            <span class="lbl">Foto's</span>
+            <p class="status" style="margin:6px 0 0">De eerste foto is de omslagfoto. Verplaats foto's met de pijltjes.</p>
+            <ul class="photos" id="fotos"></ul>
+            <label class="drop" id="drop">
+              <input id="f-fotos" type="file" accept="image/jpeg,image/png,image/webp" multiple>
+              <b>Foto's toevoegen</b>
+              <span>Klik hier of sleep foto's hierheen (JPG of PNG). Ze worden automatisch verkleind.</span>
+            </label>
+            <label class="pub" style="margin-top:22px">
+              <input id="f-pub" type="checkbox">
+              <div><b>Tonen op de website</b><span>Uit = concept. Alleen zichtbaar hier in het portaal.</span></div>
+            </label>
+          </div>
+        </div>
+        <p class="msg err" id="edit-msg" role="alert" hidden></p>
+        <div class="foot">
+          <button class="btn" type="submit" id="opslaan">Opslaan</button>
+          <button class="btn ghost" type="button" id="annuleer">Annuleren</button>
+          <span class="grow"></span>
+          <span class="status" id="edit-status" aria-live="polite"></span>
+        </div>
+      </form>
+    </section>
+  </div>
+</main>
+<script>
+(function(){
+  var API='/portaal/api/';
+  var STATUS={'in-voorbereiding':'In voorbereiding','in-aanbouw':'In aanbouw','opgeleverd':'Opgeleverd'};
+  var $=function(id){return document.getElementById(id)};
+  var projecten=[], huidig=null, fotos=[], bezig=0;
+
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+
+  function api(pad,opts){
+    opts=opts||{}; opts.redirect='manual'; opts.credentials='same-origin';
+    return fetch(API+pad,opts).then(function(r){
+      if(r.type==='opaqueredirect'||r.status===401||r.status===0){
+        var e=new Error('sessie'); e.sessie=true; throw e;
+      }
+      return r.json().catch(function(){return {}}).then(function(d){
+        if(!r.ok) throw new Error(d.fout||'Er ging iets mis. Probeer het opnieuw.');
+        return d;
+      });
+    });
+  }
+  function meld(el,e){
+    el.hidden=false;
+    if(e&&e.sessie){el.innerHTML='Je bent uitgelogd. <a href="/auth/login?r=/portaal/projecten/">Opnieuw inloggen</a>';return}
+    el.textContent=(e&&e.message)||String(e);
+  }
+
+  // ---------- lijst ----------
+  function laad(){
+    return api('projecten').then(function(d){projecten=d.projecten||[];toonLijst()}).catch(function(e){meld($('lijst-msg'),e)});
+  }
+  function toonLijst(){
+    var ul=$('lijst'); ul.innerHTML='';
+    $('leeg').hidden=projecten.length>0;
+    projecten.forEach(function(p){
+      var li=document.createElement('li'); li.className='row';
+      var img=p.fotos&&p.fotos[0]?'<img class="thumb" src="/api/foto/'+esc(p.fotos[0])+'" alt="" loading="lazy">':'<div class="thumb empty">Geen foto</div>';
+      var meta=[p.plaats,STATUS[p.status],p.woningen!=null?p.woningen+(p.woningen===1?' woning':' woningen'):''].filter(Boolean).map(esc).join(' · ');
+      li.innerHTML=img+'<div><b>'+esc(p.titel)+'</b><span class="meta">'+meta+'</span><br><span class="badge '+(p.gepubliceerd?'live':'draft')+'">'+(p.gepubliceerd?'Op de website':'Concept')+'</span></div>'+
+        '<div class="acts"><button class="btn sm ghost" data-edit>Bewerken</button><button class="btn sm danger" data-del>Verwijderen</button></div>';
+      li.querySelector('[data-edit]').onclick=function(){open(p)};
+      li.querySelector('[data-del]').onclick=function(){verwijder(p)};
+      ul.appendChild(li);
+    });
+  }
+  function verwijder(p){
+    if(!confirm('"'+p.titel+'" en de foto\'s definitief verwijderen?')) return;
+    api('projecten?id='+encodeURIComponent(p.id),{method:'DELETE'}).then(laad).catch(function(e){meld($('lijst-msg'),e)});
+  }
+
+  // ---------- editor ----------
+  function open(p){
+    huidig=p||null;
+    $('edit-h').textContent=p?'Project bewerken':'Nieuw project';
+    $('f-titel').value=p?p.titel:'';
+    $('f-plaats').value=p?p.plaats:'';
+    $('f-woningen').value=p&&p.woningen!=null?p.woningen:'';
+    $('f-status').value=p?p.status:'in-voorbereiding';
+    $('f-beschrijving').value=p?p.beschrijving:'';
+    $('f-pub').checked=p?p.gepubliceerd:false;
+    fotos=(p?p.fotos:[]).map(function(k){return {key:k,src:'/api/foto/'+k}});
+    $('edit-msg').hidden=true; $('edit-status').textContent='';
+    toonFotos();
+    $('lijst-view').hidden=true; $('edit-view').hidden=false;
+    scrollTo(0,0); $('f-titel').focus();
+  }
+  function sluit(){
+    $('edit-view').hidden=true; $('lijst-view').hidden=false; huidig=null;
+  }
+  $('nieuw').onclick=function(){open(null)};
+  $('annuleer').onclick=sluit;
+
+  function toonFotos(){
+    var ul=$('fotos'); ul.innerHTML='';
+    fotos.forEach(function(f,i){
+      var li=document.createElement('li'); li.className='photo'+(f.key?'':' busy');
+      li.innerHTML='<img src="'+esc(f.src)+'" alt="">'+(i===0?'<span class="cover">Omslag</span>':'')+
+        '<div class="ctrl"><button type="button" aria-label="Naar voren"'+(i===0?' disabled':'')+'>←</button><button type="button" aria-label="Naar achteren"'+(i===fotos.length-1?' disabled':'')+'>→</button><button type="button" aria-label="Foto verwijderen">✕</button></div>';
+      var b=li.querySelectorAll('button');
+      b[0].onclick=function(){wissel(i,i-1)};
+      b[1].onclick=function(){wissel(i,i+1)};
+      b[2].onclick=function(){fotos.splice(i,1);toonFotos()};
+      ul.appendChild(li);
+    });
+  }
+  function wissel(a,b){if(b<0||b>=fotos.length)return;var t=fotos[a];fotos[a]=fotos[b];fotos[b]=t;toonFotos()}
+
+  // Foto verkleinen tot maximaal 2000 px en als JPG opslaan.
+  function verklein(file){
+    var MAX=2000;
+    var bron=window.createImageBitmap?createImageBitmap(file,{imageOrientation:'from-image'}).catch(function(){return laadImg(file)}):laadImg(file);
+    return bron.then(function(img){
+      var w=img.width,h=img.height,s=Math.min(1,MAX/Math.max(w,h));
+      var c=document.createElement('canvas'); c.width=Math.round(w*s); c.height=Math.round(h*s);
+      var x=c.getContext('2d'); x.fillStyle='#fff'; x.fillRect(0,0,c.width,c.height); x.drawImage(img,0,0,c.width,c.height);
+      return new Promise(function(res,rej){c.toBlob(function(b){b?res(b):rej(new Error('Deze foto kon niet worden gelezen.'))},'image/jpeg',.85)});
+    });
+  }
+  function laadImg(file){
+    return new Promise(function(res,rej){
+      var i=new Image(); i.onload=function(){res(i)}; i.onerror=function(){rej(new Error('"'+file.name+'" kan niet worden gelezen. Gebruik JPG of PNG.'))};
+      i.src=URL.createObjectURL(file);
+    });
+  }
+  function voegToe(files){
+    Array.prototype.forEach.call(files,function(file){
+      if(!/^image\//.test(file.type)&&!/\.(jpe?g|png|webp|heic)$/i.test(file.name)) return;
+      var f={key:null,src:URL.createObjectURL(file)}; fotos.push(f); bezig++; toonFotos(); status();
+      verklein(file).then(function(blob){
+        return api('foto',{method:'POST',headers:{'content-type':'image/jpeg'},body:blob});
+      }).then(function(d){f.key=d.foto;f.src=d.url}).catch(function(e){
+        fotos.splice(fotos.indexOf(f),1); meld($('edit-msg'),e);
+      }).then(function(){bezig--;toonFotos();status()});
+    });
+  }
+  function status(){
+    $('edit-status').textContent=bezig?'Foto\'s uploaden… ('+bezig+')':'';
+    $('opslaan').disabled=bezig>0;
+  }
+  $('f-fotos').onchange=function(e){voegToe(e.target.files);e.target.value=''};
+  var drop=$('drop');
+  ['dragenter','dragover'].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.add('over')})});
+  ['dragleave','drop'].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.remove('over')})});
+  drop.addEventListener('drop',function(e){voegToe(e.dataTransfer.files)});
+
+  $('form').onsubmit=function(e){
+    e.preventDefault();
+    if(bezig) return;
+    $('edit-msg').hidden=true;
+    if(!$('f-titel').value.trim()){meld($('edit-msg'),'Vul een titel in.');$('f-titel').focus();return}
+    var body={
+      id:huidig?huidig.id:undefined,
+      titel:$('f-titel').value, plaats:$('f-plaats').value, status:$('f-status').value,
+      woningen:$('f-woningen').value===''?null:Number($('f-woningen').value),
+      beschrijving:$('f-beschrijving').value,
+      fotos:fotos.filter(function(f){return f.key}).map(function(f){return f.key}),
+      gepubliceerd:$('f-pub').checked
+    };
+    $('opslaan').disabled=true; $('edit-status').textContent='Opslaan…';
+    api('projecten',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}).then(function(){
+      sluit(); return laad();
+    }).then(function(){
+      var m=$('lijst-msg'); m.hidden=false; m.className='msg';
+      m.textContent=body.gepubliceerd?'Opgeslagen en zichtbaar op de website.':'Opgeslagen als concept.';
+    }).catch(function(e){meld($('edit-msg'),e)}).then(function(){$('opslaan').disabled=false;status()});
+  };
+
+  laad();
+})();
+</script>
+</body>
+</html>

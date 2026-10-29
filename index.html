@@ -287,6 +287,31 @@ p{margin:0}
 @media (max-width:560px){.cform{grid-template-columns:1fr}}
 
 /* Footer */
+/* Recente projecten (carrousel) */
+.recent{padding-block:clamp(64px,8vw,104px);border-top:1px solid var(--line)}
+.recent .sec-head{align-items:end}
+.recent .head-r{display:flex;flex-direction:column;align-items:flex-start;gap:20px}
+.rc-ctrl{display:flex;gap:8px}
+.rc-ctrl button{width:48px;height:48px;border:1px solid var(--green);background:transparent;color:var(--green);font:600 18px/1 var(--body);border-radius:2px;cursor:pointer;transition:background .15s,opacity .15s}
+.rc-ctrl button:hover{background:var(--sand)}
+.rc-ctrl button[disabled]{opacity:.3;cursor:default;background:transparent}
+.rc-track{list-style:none;margin:0;padding:0 0 6px;display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 2*24px)/3);gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;overscroll-behavior-x:contain}
+.rc-track::-webkit-scrollbar{display:none}
+.rc-track li{scroll-snap-align:start;min-width:0}
+@media (max-width:980px){.rc-track{grid-auto-columns:calc((100% - 20px)/2);gap:20px}}
+@media (max-width:600px){.rc-track{grid-auto-columns:84%;gap:14px}}
+.rc-card{display:block;text-decoration:none;color:inherit}
+.rc-card .ph{position:relative;display:block;aspect-ratio:4/3;background:var(--sand);overflow:hidden}
+.rc-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.rc-card:hover img{transform:scale(1.035)}
+.rc-card .tag{position:absolute;left:12px;top:12px;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;background:var(--paper);color:var(--green);padding:7px 9px;border-radius:2px}
+.rc-card .tag.opgeleverd{background:var(--green);color:var(--sand)}
+.rc-card .tag.in-aanbouw{background:var(--gold);color:var(--green)}
+.rc-card .noph{position:absolute;inset:0;display:grid;place-items:center;color:var(--gold-deep)}
+.rc-card .noph svg{width:42%;height:auto;opacity:.55}
+.rc-card h3{font-size:22px;margin-top:16px}
+.rc-card .meta{display:block;margin-top:6px;color:var(--muted);font-size:15px}
+.rc-foot{margin-top:clamp(28px,4vw,44px)}
 footer{background:var(--green);color:var(--on-green-muted);padding-block:44px;font-size:14px}
 footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
 footer img{height:34px;width:auto;display:block}
@@ -301,6 +326,7 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
     <nav class="nav" aria-label="Hoofdmenu">
       <a href="#werkwijze">Werkwijze</a>
       <a href="#voor-wie">Voor wie</a>
+      <a href="/projecten/">Projecten</a>
       <a href="#over-ons">Over ons</a>
       <a class="btn-sm" href="#contact">Contact</a>
     </nav>
@@ -309,6 +335,7 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
       <div class="drop">
         <a href="#werkwijze">Werkwijze</a>
         <a href="#voor-wie">Voor wie</a>
+        <a href="/projecten/">Projecten</a>
         <a href="#over-ons">Over ons</a>
         <a href="#contact">Contact</a>
       </div>
@@ -516,6 +543,23 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
         <div class="founder"><div class="portrait"><img src="assets/bram.jpg" alt="Portretfoto van Bram" width="600" height="750" loading="lazy" decoding="async"></div><h3>Bram</h3><span>Mede-oprichter</span><ul><li><b>Mail</b><a href="mailto:bram@planovabv.nl">bram@planovabv.nl</a></li><li><b>Tel</b><a href="tel:+31612855761">06 12 85 57 61</a></li></ul></div>
         <div class="founder"><div class="portrait"><img src="assets/tom.jpg" alt="Portretfoto van Tom" width="600" height="750" loading="lazy" decoding="async"></div><h3>Tom</h3><span>Mede-oprichter</span><ul><li><b>Mail</b><a href="mailto:tom@planovabv.nl">tom@planovabv.nl</a></li><li><b>Tel</b><a href="tel:+31618487693">06 18 48 76 93</a></li></ul></div>
       </div>
+    </div>
+  </section>
+
+  <section class="recent" id="projecten" aria-labelledby="rc-h" hidden>
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Projecten</p>
+          <h2 id="rc-h">Recente projecten.</h2>
+        </div>
+        <div class="head-r">
+          <p>Een greep uit de projecten waar we aan werken, van plannen in voorbereiding tot opgeleverde woningen.</p>
+          <div class="rc-ctrl"><button type="button" id="rc-prev" aria-label="Vorige projecten">←</button><button type="button" id="rc-next" aria-label="Volgende projecten">→</button></div>
+        </div>
+      </div>
+      <ul class="rc-track" id="rc-track"></ul>
+      <div class="rc-foot"><a class="btn primary" href="/projecten/">Bekijk alle projecten <span class="arr" aria-hidden="true">→</span></a></div>
     </div>
   </section>
 
@@ -902,6 +946,29 @@ document.querySelectorAll('.drop a').forEach(a=>a.addEventListener('click',()=>a
   function kick(){ measure(); if(!raf) raf=requestAnimationFrame(tick); }
   addEventListener('scroll',kick,{passive:true}); addEventListener('resize',kick);
   measure(); cur=target; render(cur);
+})();
+</script>
+<script>
+(function(){
+  var sec=document.getElementById('projecten'), tr=document.getElementById('rc-track');
+  if(!sec||!tr||!window.fetch) return;
+  var NOPH='<span class="noph"><svg viewBox="0 0 100 70" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 66h84M18 66V34l22-18 22 18v32M62 66V44l15-12 15 12v22M32 66V50h16v16"/></svg></span>';
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  fetch('/api/projecten?limit=5').then(function(r){return r.ok?r.json():null}).catch(function(){return null}).then(function(d){
+    var l=d&&d.projecten||[]; if(!l.length) return;
+    tr.innerHTML=l.map(function(p){
+      var meta=[p.plaats,p.woningen!=null?p.woningen+(p.woningen===1?' woning':' woningen'):''].filter(Boolean).join(' · ');
+      return '<li><a class="rc-card" href="/projecten/#'+esc(p.id)+'"><span class="ph">'+(p.fotos[0]?'<img src="'+esc(p.fotos[0])+'" alt="" loading="lazy" decoding="async">':NOPH)+
+        '<span class="tag '+esc(p.status)+'">'+esc(p.statusLabel)+'</span></span><h3>'+esc(p.titel)+'</h3><span class="meta">'+esc(meta)+'</span></a></li>';
+    }).join('');
+    sec.hidden=false;
+    var prev=document.getElementById('rc-prev'), next=document.getElementById('rc-next');
+    function stap(){var li=tr.querySelector('li');return li?li.getBoundingClientRect().width+parseFloat(getComputedStyle(tr).columnGap||0):tr.clientWidth}
+    function upd(){prev.disabled=tr.scrollLeft<4;next.disabled=tr.scrollLeft+tr.clientWidth>=tr.scrollWidth-4;document.querySelector('.rc-ctrl').hidden=tr.scrollWidth<=tr.clientWidth+4}
+    prev.onclick=function(){tr.scrollBy({left:-stap(),behavior:'smooth'})};
+    next.onclick=function(){tr.scrollBy({left:stap(),behavior:'smooth'})};
+    tr.addEventListener('scroll',upd,{passive:true}); addEventListener('resize',upd); upd();
+  });
 })();
 </script>
 </body>
