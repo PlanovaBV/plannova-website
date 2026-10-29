@@ -59,6 +59,13 @@ h2{font:600 26px/1.15 var(--display);margin:0}
 .thumb.empty{display:grid;place-items:center;font:500 10px/1.2 var(--mono);letter-spacing:.1em;color:var(--muted);text-transform:uppercase;text-align:center}
 .row b{font:600 19px/1.2 var(--display);display:block}
 .row .meta{color:var(--muted);font-size:14.5px}
+.tog{display:inline-flex;align-items:center;gap:10px;margin-top:8px;cursor:pointer;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tog input{appearance:none;-webkit-appearance:none;margin:0;width:40px;height:22px;border-radius:11px;background:var(--line);position:relative;cursor:pointer;transition:background .15s;flex:none}
+.tog input::after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .15s}
+.tog input:checked{background:var(--green)}
+.tog input:checked::after{transform:translateX(18px)}
+.tog input:checked+span{color:var(--green)}
+.tog input:disabled{opacity:.5}
 .badge{display:inline-block;margin-top:6px;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:5px 8px;border-radius:2px}
 .badge.live{background:var(--green);color:var(--sand)}
 .badge.draft{background:var(--sand);color:var(--muted)}
@@ -73,7 +80,7 @@ h2{font:600 26px/1.15 var(--display);margin:0}
 .field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
 .field label,.lbl{font:500 12px/1.2 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gold-deep)}
 .field small{color:var(--muted);font:400 13px/1.4 var(--body);text-transform:none;letter-spacing:0}
-input[type=text],input[type=number],select,textarea{font:400 16px/1.4 var(--body);color:var(--green);background:var(--paper);border:1px solid var(--line);border-radius:2px;padding:12px 14px;width:100%}
+input[type=text],input[type=number],input[type=month],select,textarea{font:400 16px/1.4 var(--body);color:var(--green);background:var(--paper);border:1px solid var(--line);border-radius:2px;padding:12px 14px;width:100%}
 textarea{min-height:200px;resize:vertical}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:0;border-color:var(--gold)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -114,7 +121,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
       <div class="head">
         <div>
           <h1>Projecten</h1>
-          <p class="intro">Projecten met "Tonen op de website" aan staan op planovabv.nl/projecten. De vijf nieuwste staan ook onderaan de homepage.</p>
+          <p class="intro">Projecten die op de website staan, verschijnen op planovabv.nl/projecten, op volgorde van opleverdatum (nieuwste bovenaan). De bovenste vijf staan ook onderaan de homepage.</p>
         </div>
         <button class="btn" id="nieuw" type="button">+ Nieuw project</button>
       </div>
@@ -142,13 +149,19 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
                 <input id="f-woningen" type="number" min="0" step="1" inputmode="numeric">
               </div>
             </div>
-            <div class="field">
-              <label for="f-status">Status</label>
-              <select id="f-status">
-                <option value="in-voorbereiding">In voorbereiding</option>
-                <option value="in-aanbouw">In aanbouw</option>
-                <option value="opgeleverd">Opgeleverd</option>
-              </select>
+            <div class="two">
+              <div class="field">
+                <label for="f-status">Status</label>
+                <select id="f-status">
+                  <option value="in-voorbereiding">In voorbereiding</option>
+                  <option value="in-aanbouw">In aanbouw</option>
+                  <option value="opgeleverd">Opgeleverd</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-oplevering">Opleverdatum <small>(of verwacht)</small></label>
+                <input id="f-oplevering" type="month" min="1990-01" max="2099-12" placeholder="jjjj-mm">
+              </div>
             </div>
             <div class="field">
               <label for="f-beschrijving">Beschrijving <small>Een witregel maakt een nieuwe alinea.</small></label>
@@ -166,7 +179,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
             </label>
             <label class="pub" style="margin-top:22px">
               <input id="f-pub" type="checkbox">
-              <div><b>Tonen op de website</b><span>Uit = concept. Alleen zichtbaar hier in het portaal.</span></div>
+              <div><b>Tonen op de website</b><span>Uit = alleen zichtbaar hier in het portaal. Dit kun je later ook in het overzicht aan- of uitzetten.</span></div>
             </label>
           </div>
         </div>
@@ -218,13 +231,26 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
     projecten.forEach(function(p){
       var li=document.createElement('li'); li.className='row';
       var img=p.fotos&&p.fotos[0]?'<img class="thumb" src="/api/foto/'+esc(p.fotos[0])+'" alt="" loading="lazy">':'<div class="thumb empty">Geen foto</div>';
-      var meta=[p.plaats,STATUS[p.status],p.woningen!=null?p.woningen+(p.woningen===1?' woning':' woningen'):''].filter(Boolean).map(esc).join(' · ');
-      li.innerHTML=img+'<div><b>'+esc(p.titel)+'</b><span class="meta">'+meta+'</span><br><span class="badge '+(p.gepubliceerd?'live':'draft')+'">'+(p.gepubliceerd?'Op de website':'Concept')+'</span></div>'+
+      var meta=[p.plaats,STATUS[p.status],maand(p.oplevering),p.woningen!=null?p.woningen+(p.woningen===1?' woning':' woningen'):''].filter(Boolean).map(esc).join(' · ');
+      li.innerHTML=img+'<div><b>'+esc(p.titel)+'</b><span class="meta">'+meta+'</span><br><label class="tog"><input type="checkbox" data-pub'+(p.gepubliceerd?' checked':'')+'><span>'+(p.gepubliceerd?'Op de website':'Niet op de website')+'</span></label></div>'+
         '<div class="acts"><button class="btn sm ghost" data-edit>Bewerken</button><button class="btn sm danger" data-del>Verwijderen</button></div>';
       li.querySelector('[data-edit]').onclick=function(){open(p)};
       li.querySelector('[data-del]').onclick=function(){verwijder(p)};
+      li.querySelector('[data-pub]').onchange=function(e){zichtbaar(p,e.target)};
       ul.appendChild(li);
     });
+  }
+  function maand(v){
+    if(!v) return '';
+    var m=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'][+v.slice(5,7)-1];
+    return 'oplevering '+m+' '+v.slice(0,4);
+  }
+  function zichtbaar(p,box){
+    box.disabled=true;
+    var body=Object.assign({},p,{gepubliceerd:box.checked});
+    api('projecten',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}).then(function(d){
+      Object.assign(p,d.project); box.nextElementSibling.textContent=p.gepubliceerd?'Op de website':'Niet op de website';
+    }).catch(function(e){box.checked=!box.checked;meld($('lijst-msg'),e)}).then(function(){box.disabled=false});
   }
   function verwijder(p){
     if(!confirm('"'+p.titel+'" en de foto\'s definitief verwijderen?')) return;
@@ -239,6 +265,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
     $('f-plaats').value=p?p.plaats:'';
     $('f-woningen').value=p&&p.woningen!=null?p.woningen:'';
     $('f-status').value=p?p.status:'in-voorbereiding';
+    $('f-oplevering').value=p&&p.oplevering?p.oplevering:'';
     $('f-beschrijving').value=p?p.beschrijving:'';
     $('f-pub').checked=p?p.gepubliceerd:false;
     fotos=(p?p.fotos:[]).map(function(k){return {key:k,src:'/api/foto/'+k}});
@@ -315,6 +342,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
       id:huidig?huidig.id:undefined,
       titel:$('f-titel').value, plaats:$('f-plaats').value, status:$('f-status').value,
       woningen:$('f-woningen').value===''?null:Number($('f-woningen').value),
+      oplevering:$('f-oplevering').value,
       beschrijving:$('f-beschrijving').value,
       fotos:fotos.filter(function(f){return f.key}).map(function(f){return f.key}),
       gepubliceerd:$('f-pub').checked

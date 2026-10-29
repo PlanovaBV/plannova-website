@@ -13,6 +13,7 @@ const MAX_FOTOS = 24;
 const FOTO_TYPES = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" };
 const ID_RE = /^[a-z0-9-]{8,64}$/;
 const FOTO_RE = /^[a-z0-9-]{8,64}\.(jpg|png|webp)$/;
+const MAAND_RE = /^(19|20)\d\d-(0[1-9]|1[0-2])$/;
 
 const json = (data, status = 200, headers = {}) =>
   new Response(JSON.stringify(data), {
@@ -42,6 +43,7 @@ export function valideer(input, bestaand) {
     if (!Number.isInteger(n) || n < 0 || n > 100000) return { fout: "Aantal woningen moet een heel getal zijn." };
     woningen = n;
   }
+  const oplevering = MAAND_RE.test(String(input.oplevering || "")) ? String(input.oplevering) : "";
   const fotos = Array.isArray(input.fotos) ? input.fotos.filter((f) => typeof f === "string" && FOTO_RE.test(f)) : [];
   if (fotos.length > MAX_FOTOS) return { fout: `Maximaal ${MAX_FOTOS} foto's per project.` };
   const nu = new Date().toISOString();
@@ -52,6 +54,7 @@ export function valideer(input, bestaand) {
       plaats: tekst(input.plaats, 80),
       status,
       woningen,
+      oplevering,
       beschrijving: tekst(input.beschrijving, 6000),
       fotos: [...new Set(fotos)],
       gepubliceerd: input.gepubliceerd === true,
@@ -64,7 +67,12 @@ export function valideer(input, bestaand) {
 async function alleProjecten(store) {
   const { blobs } = await store.list({ prefix: "project/" });
   const lijst = await Promise.all(blobs.map((b) => store.get(b.key, { type: "json" })));
-  return lijst.filter(Boolean).sort((a, b) => (a.aangemaakt < b.aangemaakt ? 1 : -1));
+  // Volgorde: opleverdatum, nieuwste bovenaan. Zonder datum bovenaan; daarbinnen nieuwst toegevoegd eerst.
+  return lijst.filter(Boolean).sort((a, b) => {
+    const da = a.oplevering || "9999-99", db = b.oplevering || "9999-99";
+    if (da !== db) return da < db ? 1 : -1;
+    return a.aangemaakt < b.aangemaakt ? 1 : -1;
+  });
 }
 
 function publiek(p) {
@@ -75,6 +83,7 @@ function publiek(p) {
     status: p.status,
     statusLabel: STATUSSEN[p.status],
     woningen: p.woningen,
+    oplevering: p.oplevering || "",
     beschrijving: p.beschrijving,
     fotos: p.fotos.map((f) => `/api/foto/${f}`),
     aangemaakt: p.aangemaakt,
