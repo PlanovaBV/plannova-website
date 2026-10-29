@@ -159,8 +159,11 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
                 </select>
               </div>
               <div class="field">
-                <label for="f-oplevering">Opleverdatum <small>(of verwacht)</small></label>
-                <input id="f-oplevering" type="month" min="1990-01" max="2099-12" placeholder="jjjj-mm">
+                <label for="f-jaar">Oplevering <small>(of verwacht)</small></label>
+                <div class="two" style="gap:8px">
+                  <input id="f-jaar" type="number" min="1990" max="2099" step="1" inputmode="numeric" placeholder="Jaar">
+                  <select id="f-maand" aria-label="Maand (optioneel)"><option value="">Maand (optioneel)</option><option value="01">januari</option><option value="02">februari</option><option value="03">maart</option><option value="04">april</option><option value="05">mei</option><option value="06">juni</option><option value="07">juli</option><option value="08">augustus</option><option value="09">september</option><option value="10">oktober</option><option value="11">november</option><option value="12">december</option></select>
+                </div>
               </div>
             </div>
             <div class="field">
@@ -242,6 +245,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
   }
   function maand(v){
     if(!v) return '';
+    if(v.length===4) return 'oplevering '+v;
     var m=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'][+v.slice(5,7)-1];
     return 'oplevering '+m+' '+v.slice(0,4);
   }
@@ -265,7 +269,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
     $('f-plaats').value=p?p.plaats:'';
     $('f-woningen').value=p&&p.woningen!=null?p.woningen:'';
     $('f-status').value=p?p.status:'in-voorbereiding';
-    $('f-oplevering').value=p&&p.oplevering?p.oplevering:'';
+    $('f-jaar').value=p&&p.oplevering?p.oplevering.slice(0,4):'';
+    $('f-maand').value=p&&p.oplevering&&p.oplevering.length>4?p.oplevering.slice(5,7):'';
     $('f-beschrijving').value=p?p.beschrijving:'';
     $('f-pub').checked=p?p.gepubliceerd:false;
     fotos=(p?p.fotos:[]).map(function(k){return {key:k,src:'/api/foto/'+k}});
@@ -342,7 +347,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
       id:huidig?huidig.id:undefined,
       titel:$('f-titel').value, plaats:$('f-plaats').value, status:$('f-status').value,
       woningen:$('f-woningen').value===''?null:Number($('f-woningen').value),
-      oplevering:$('f-oplevering').value,
+      oplevering:/^\d{4}$/.test($('f-jaar').value)?$('f-jaar').value+($('f-maand').value?'-'+$('f-maand').value:''):'',
       beschrijving:$('f-beschrijving').value,
       fotos:fotos.filter(function(f){return f.key}).map(function(f){return f.key}),
       gepubliceerd:$('f-pub').checked

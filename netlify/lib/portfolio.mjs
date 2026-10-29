@@ -13,7 +13,8 @@ const MAX_FOTOS = 24;
 const FOTO_TYPES = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" };
 const ID_RE = /^[a-z0-9-]{8,64}$/;
 const FOTO_RE = /^[a-z0-9-]{8,64}\.(jpg|png|webp)$/;
-const MAAND_RE = /^(19|20)\d\d-(0[1-9]|1[0-2])$/;
+// Opleverdatum: jaar ("2027") of jaar en maand ("2027-06").
+const MAAND_RE = /^(19|20)\d\d(-(0[1-9]|1[0-2]))?$/;
 
 const json = (data, status = 200, headers = {}) =>
   new Response(JSON.stringify(data), {
@@ -142,10 +143,25 @@ export async function beheer(req, store, gebruiker) {
 
   if (pad === "/portaal/api/foto") {
     if (req.method !== "POST") return fout(405, "Niet toegestaan.");
-    const type = (req.headers.get("content-type") || "").split(";")[0].trim();
+    let type = (req.headers.get("content-type") || "").split(";")[0].trim();
+    let data;
+    if (type === "application/json") {
+      // Foto overnemen vanaf een link (https), bijvoorbeeld van een bestaande website.
+      let bron;
+      try { bron = new URL(String((await req.json()).url || "")); } catch { return fout(400, "Ongeldige link."); }
+      if (bron.protocol !== "https:" || /^(localhost|\d+\.\d+\.\d+\.\d+|\[.*\])$/i.test(bron.hostname) || !bron.hostname.includes(".")) {
+        return fout(400, "Alleen https-links naar een website.");
+      }
+      const r = await fetch(bron, { redirect: "follow" }).catch(() => null);
+      if (!r || !r.ok) return fout(400, "De foto kon niet worden opgehaald.");
+      type = (r.headers.get("content-type") || "").split(";")[0].trim();
+      if (!FOTO_TYPES[type]) return fout(415, "Deze link is geen JPG, PNG of WebP.");
+      data = await r.arrayBuffer();
+    } else {
+      data = await req.arrayBuffer();
+    }
     const ext = FOTO_TYPES[type];
     if (!ext) return fout(415, "Alleen JPG, PNG of WebP.");
-    const data = await req.arrayBuffer();
     if (!data.byteLength) return fout(400, "Lege foto.");
     if (data.byteLength > MAX_FOTO_BYTES) return fout(413, "Deze foto is te groot.");
     const key = `${nieuwId()}.${ext}`;

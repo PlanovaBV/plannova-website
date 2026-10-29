@@ -232,7 +232,7 @@ document.querySelectorAll('.drop a').forEach(function(a){a.addEventListener('cli
   var lijst=[], huidig=null, idx=0, terug=null;
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
   var MND=['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
-  function maand(v){return v?MND[+v.slice(5,7)-1]+' '+v.slice(0,4):''}
+  function maand(v){return !v?'':v.length===4?v:MND[+v.slice(5,7)-1]+' '+v.slice(0,4)}
   function meta(p){return [p.plaats,p.woningen!=null?p.woningen+(p.woningen===1?' woning':' woningen'):''].filter(Boolean).join(' · ')}
 
   function render(){
