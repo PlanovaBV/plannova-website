@@ -11,8 +11,8 @@
 // openbare kenmerken (ze staan ook in de inlog-URL). De beveiliging zit in de
 // RS256-handtekening van Microsoft, die hieronder met WebCrypto wordt gecontroleerd.
 
-export const TENANT_ID = "VUL_TENANT_ID_IN";
-export const CLIENT_ID = "VUL_CLIENT_ID_IN";
+export const TENANT_ID = "64532b16-6ca2-4600-b9c1-783b04cad532";
+export const CLIENT_ID = "27ab8fee-6ad7-49af-8ab9-dc76fcd612f1";
 
 // Alleen deze accounts krijgen toegang (kleine letters).
 export const ALLOWED = ["bram@planovabv.nl", "tom@planovabv.nl"];
