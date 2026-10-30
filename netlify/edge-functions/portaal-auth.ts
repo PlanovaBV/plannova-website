@@ -14,8 +14,8 @@
 export const TENANT_ID = "64532b16-6ca2-4600-b9c1-783b04cad532";
 export const CLIENT_ID = "27ab8fee-6ad7-49af-8ab9-dc76fcd612f1";
 
-// Alleen deze accounts krijgen toegang (kleine letters).
-export const ALLOWED = ["bram@planovabv.nl", "tom@planovabv.nl"];
+// Alleen deze accounts krijgen toegang (kleine letters). Oude en nieuwe adressen.
+export const ALLOWED = ["bram@plannovabv.nl", "tom@plannovabv.nl", "bram@planovabv.nl", "tom@planovabv.nl"];
 
 const AUTHORITY = () => `https://login.microsoftonline.com/${TENANT_ID}`;
 const ISSUER = () => `${AUTHORITY()}/v2.0`;
@@ -164,7 +164,7 @@ function login(url: URL): Response {
     scope: "openid profile email",
     state,
     nonce,
-    domain_hint: "planovabv.nl",
+    domain_hint: "plannovabv.nl",
   }).toString();
   return redirect(auth.toString(), [cookie(FLOW, flow, { maxAge: 600, path: "/auth", sameSite: "None" })]);
 }
