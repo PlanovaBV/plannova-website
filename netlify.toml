@@ -20,8 +20,20 @@
   [headers.values]
     Cache-Control = "public, max-age=604800"
 
-# Doorverwijzing tussen planovabv.nl en www.planovabv.nl regelt Netlify zelf
-# via het primaire domein (Domain management). Hier geen redirect toevoegen.
+# Hoofdadres is plannovabv.nl (www.plannovabv.nl stuurt Netlify zelf door).
+# Het oude adres planovabv.nl (met en zonder www) stuurt blijvend door naar het
+# nieuwe adres, zodat oude links en de QR-code op de visitekaartjes blijven werken.
+[[redirects]]
+  from = "https://planovabv.nl/*"
+  to = "https://plannovabv.nl/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.planovabv.nl/*"
+  to = "https://plannovabv.nl/:splat"
+  status = 301
+  force = true
 
 # Contactkaarten (vCard) voor de QR-code op de visitekaartjes
 [[headers]]
