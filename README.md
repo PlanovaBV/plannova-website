@@ -7,7 +7,7 @@ Statische website van PlanNova B.V. Geen build-stap: `index.html` is de complete
 
 Live via Netlify: elke wijziging op `main` wordt automatisch gepubliceerd.
 
-Domein: www.planovabv.nl (geregistreerd bij Mijndomein). E-mail draait via Microsoft 365: MX-, SPF- en autodiscover-records bij Mijndomein nooit aanpassen voor de website.
+Website: plannovabv.nl (hoofdadres; planovabv.nl en de www-varianten sturen door). Beide domeinen geregistreerd bij Mijndomein. De e-mail draait voorlopig nog op planovabv.nl. E-mail draait via Microsoft 365: MX-, SPF- en autodiscover-records bij Mijndomein nooit aanpassen voor de website.
 
 ## Portaal (/portaal)
 
