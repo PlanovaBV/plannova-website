@@ -138,6 +138,8 @@ footer{background:var(--green);color:var(--on-green-muted);padding-block:44px;fo
 footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
 footer img{height:34px;width:auto;display:block}
 footer .legal{font:400 12.5px/1.6 var(--mono)}
+footer .legal a{color:inherit;text-underline-offset:3px}
+footer .legal a:hover{color:var(--on-green)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -220,7 +222,7 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
 <footer>
   <div class="wrap">
     <img src="/assets/logo-light.png" alt="PlanNova BV Projectontwikkeling" width="900" height="193">
-    <p class="legal">© 2026 PlanNova B.V. · KvK volgt</p>
+    <p class="legal">© 2026 PlanNova B.V. · KvK volgt · <a href="/privacy/">Privacy</a> · <a href="/privacy/" data-privacy-instellingen>Privacy-instellingen</a></p>
   </div>
 </footer>
 
@@ -306,5 +308,6 @@ document.querySelectorAll('.drop a').forEach(function(a){a.addEventListener('cli
   });
 })();
 </script>
+<script src="/assets/bezoek.js" defer></script>
 </body>
 </html>

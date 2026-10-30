@@ -69,7 +69,7 @@ main{padding-block:24px 40px}
         <h2 id="p-bram">Bram Vissers</h2>
         <ul class="lines">
           <li><a href="tel:+31612855761">+31 6 12 85 57 61</a></li>
-          <li><a href="mailto:bram@planovabv.nl">bram@planovabv.nl</a></li>
+          <li><a href="mailto:bram@plannovabv.nl">bram@plannovabv.nl</a></li>
         </ul>
         <a class="save" href="/contact/bram-plannova.vcf">
           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="8" cy="7" r="3.2"/><path d="M2.5 16.5c.8-3 3-4.5 5.5-4.5s4.7 1.5 5.5 4.5M15.5 6v6M12.5 9h6"/></svg>
@@ -82,7 +82,7 @@ main{padding-block:24px 40px}
         <h2 id="p-tom">Tom Wasmann</h2>
         <ul class="lines">
           <li><a href="tel:+31618487693">+31 6 18 48 76 93</a></li>
-          <li><a href="mailto:tom@planovabv.nl">tom@planovabv.nl</a></li>
+          <li><a href="mailto:tom@plannovabv.nl">tom@plannovabv.nl</a></li>
         </ul>
         <a class="save" href="/contact/tom-plannova.vcf">
           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="8" cy="7" r="3.2"/><path d="M2.5 16.5c.8-3 3-4.5 5.5-4.5s4.7 1.5 5.5 4.5M15.5 6v6M12.5 9h6"/></svg>
@@ -96,8 +96,8 @@ main{padding-block:24px 40px}
       if(!/Android/i.test(navigator.userAgent)) return;
       // Android: open het scherm "Contact maken" met ingevulde gegevens; terugvallen op de vCard-download.
       var people={
-        bram:{name:'Bram Vissers',phone:'+31612855761',email:'bram@planovabv.nl'},
-        tom:{name:'Tom Wasmann',phone:'+31618487693',email:'tom@planovabv.nl'}
+        bram:{name:'Bram Vissers',phone:'+31612855761',email:'bram@plannovabv.nl'},
+        tom:{name:'Tom Wasmann',phone:'+31618487693',email:'tom@plannovabv.nl'}
       };
       document.querySelectorAll('a.save').forEach(function(a){
         var key=/\/contact\/(\w+)-plannova\.vcf/.exec(a.getAttribute('href'));
@@ -115,9 +115,11 @@ main{padding-block:24px 40px}
     <nav class="more" aria-label="Meer">
       <a href="/">Naar plannovabv.nl</a>
       <a href="/#contact">Stuur ons een bericht</a>
-      <a href="mailto:info@planovabv.nl">info@planovabv.nl</a>
+      <a href="mailto:info@plannovabv.nl">info@plannovabv.nl</a>
+      <a href="/privacy/">Privacy</a>
     </nav>
   </div>
 </main>
+<script src="/assets/bezoek.js" defer></script>
 </body>
 </html>

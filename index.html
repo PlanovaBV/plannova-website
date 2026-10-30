@@ -319,6 +319,8 @@ footer{background:var(--green);color:var(--on-green-muted);padding-block:44px;fo
 footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
 footer img{height:34px;width:auto;display:block}
 footer .legal{font:400 12.5px/1.6 var(--mono)}
+footer .legal a{color:inherit;text-underline-offset:3px}
+footer .legal a:hover{color:var(--on-green)}
 </style>
 </head>
 <body>
@@ -543,8 +545,8 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
         <p>Daarom combineren we ondernemerschap en praktijkervaring met de nieuwste technologie. Kort, persoonlijk en met cijfers die u kunt narekenen.</p>
       </div>
       <div class="founders">
-        <div class="founder"><div class="portrait"><img src="assets/bram.jpg" alt="Portretfoto van Bram" width="600" height="750" loading="lazy" decoding="async"></div><h3>Bram</h3><span>Mede-oprichter</span><ul><li><b>Mail</b><a href="mailto:bram@planovabv.nl">bram@planovabv.nl</a></li><li><b>Tel</b><a href="tel:+31612855761">06 12 85 57 61</a></li></ul></div>
-        <div class="founder"><div class="portrait"><img src="assets/tom.jpg" alt="Portretfoto van Tom" width="600" height="750" loading="lazy" decoding="async"></div><h3>Tom</h3><span>Mede-oprichter</span><ul><li><b>Mail</b><a href="mailto:tom@planovabv.nl">tom@planovabv.nl</a></li><li><b>Tel</b><a href="tel:+31618487693">06 18 48 76 93</a></li></ul></div>
+        <div class="founder"><div class="portrait"><img src="assets/bram.jpg" alt="Portretfoto van Bram" width="600" height="750" loading="lazy" decoding="async"></div><h3>Bram</h3><span>Mede-oprichter</span><ul><li><b>Mail</b><a href="mailto:bram@plannovabv.nl">bram@plannovabv.nl</a></li><li><b>Tel</b><a href="tel:+31612855761">06 12 85 57 61</a></li></ul></div>
+        <div class="founder"><div class="portrait"><img src="assets/tom.jpg" alt="Portretfoto van Tom" width="600" height="750" loading="lazy" decoding="async"></div><h3>Tom</h3><span>Mede-oprichter</span><ul><li><b>Mail</b><a href="mailto:tom@plannovabv.nl">tom@plannovabv.nl</a></li><li><b>Tel</b><a href="tel:+31618487693">06 18 48 76 93</a></li></ul></div>
       </div>
     </div>
   </section>
@@ -573,7 +575,7 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
         <h2>Een locatie, een idee of een vraag? We horen graag van u.</h2>
         <p class="intro">Laat een bericht achter, dan nemen we binnen twee werkdagen contact met u op.</p>
         <dl>
-          <dt>E-mail</dt><dd><a href="mailto:info@planovabv.nl">info@planovabv.nl</a></dd>
+          <dt>E-mail</dt><dd><a href="mailto:info@plannovabv.nl">info@plannovabv.nl</a></dd>
           <dt>Telefoon</dt><dd><span>Bram <a href="tel:+31612855761">06 12 85 57 61</a></span><span>Tom <a href="tel:+31618487693">06 18 48 76 93</a></span></dd>
         </dl>
       </div>
@@ -627,7 +629,7 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
 <footer>
   <div class="wrap">
     <img src="assets/logo-light.png" alt="PlanNova BV Projectontwikkeling" width="900" height="193">
-    <p class="legal">© 2026 PlanNova B.V. · KvK volgt</p>
+    <p class="legal">© 2026 PlanNova B.V. · KvK volgt · <a href="/privacy/">Privacy</a> · <a href="/privacy/" data-privacy-instellingen>Privacy-instellingen</a></p>
   </div>
 </footer>
 <script>
@@ -914,7 +916,7 @@ document.querySelectorAll('.drop a').forEach(a=>a.addEventListener('click',()=>a
     btn.disabled=true; msg.className='form-msg'; msg.textContent='Bezig met versturen…';
     fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(f)).toString()})
       .then(function(r){ if(!r.ok) throw new Error(r.status); done(); })
-      .catch(function(){ btn.disabled=false; msg.className='form-msg bad'; msg.textContent='Versturen is niet gelukt. Probeer het opnieuw of mail ons op info@planovabv.nl.'; });
+      .catch(function(){ btn.disabled=false; msg.className='form-msg bad'; msg.textContent='Versturen is niet gelukt. Probeer het opnieuw of mail ons op info@plannovabv.nl.'; });
   });
 })();
 
@@ -988,5 +990,6 @@ document.querySelectorAll('.drop a').forEach(a=>a.addEventListener('click',()=>a
   });
 })();
 </script>
+<script src="/assets/bezoek.js" defer></script>
 </body>
 </html>
