@@ -106,6 +106,9 @@ p{margin:0}
 .hero .wrap{grid-template-columns:1fr}
 .hero h1{max-width:13em}
 .cue{margin-top:56px;font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;align-items:center}
+.replay-btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--green);border:1px solid var(--green);border-radius:2px;padding:12px 16px;transition:background .15s}
+.replay-btn:hover{background:var(--sand)}
+.replay-btn span{animation:none!important;color:var(--gold-deep)}
 .cue span{display:inline-block;animation:bob 1.8s ease-in-out infinite;color:var(--gold-deep)}
 @keyframes bob{50%{transform:translateY(5px)}}
 
@@ -356,7 +359,7 @@ footer .legal{font:400 12.5px/1.6 var(--mono)}
           <a class="btn ghost" href="#contact">Neem contact op</a>
         </div>
         <p class="cue" id="cue-on">Scroll en zie hoe een kavel een project wordt <span aria-hidden="true">↓</span> <a href="#voor-wie" class="skip-link">of sla over</a></p>
-        <p class="cue" id="cue-off" hidden><a href="#groei" id="replay">Animatie opnieuw bekijken</a></p>
+        <p class="cue" id="cue-off" hidden><a href="#groei" id="replay" class="replay-btn">Animatie bekijken <span aria-hidden="true">↻</span></a></p>
       </div>
       
     </div>
@@ -820,9 +823,23 @@ document.querySelectorAll('.drop a').forEach(a=>a.addEventListener('click',()=>a
 
 
   var skipBtn=document.getElementById('skip'), doors=document.getElementById('voor-wie');
-  var cueOn=document.getElementById('cue-on'), cueOff=document.getElementById('cue-off'), KEY='plannova-skip-anim';
-  function store(v){try{v?localStorage.setItem(KEY,'1'):localStorage.removeItem(KEY)}catch(_){}}
-  function stored(){try{return localStorage.getItem(KEY)==='1'}catch(_){return false}}
+  var cueOn=document.getElementById('cue-on'), cueOff=document.getElementById('cue-off');
+  // Voorkeur voor de animatie (functionele opslag in de browser, geen tracking):
+  //  leeg   = eerste bezoek: animatie tonen en onthouden dat hij gezien is
+  //  gezien = volgend bezoek: animatie verbergen, knop "Animatie bekijken" tonen
+  //  uit    = bezoeker heeft overgeslagen
+  //  aan    = bezoeker heeft hem weer aangezet: blijft aan bij volgende bezoeken
+  var KEY='plannova-animatie', OUD='plannova-skip-anim', SESSIE='plannova-animatie-bezoek';
+  function lees(){try{var v=localStorage.getItem(KEY); if(!v&&localStorage.getItem(OUD)==='1') v='uit'; return v}catch(_){return 'aan'}}
+  function store(skip){try{localStorage.setItem(KEY,skip?'uit':'aan');localStorage.removeItem(OUD)}catch(_){}}
+  function stored(){
+    var v=lees();
+    try{
+      if(!v){localStorage.setItem(KEY,'gezien');sessionStorage.setItem(SESSIE,'1');return false}
+      if(v==='gezien'&&sessionStorage.getItem(SESSIE)==='1') return false; // zelfde bezoek, bv. na herladen
+    }catch(_){}
+    return v==='gezien'||v==='uit';
+  }
   function headOff(){var h=document.querySelector('.top');return h?h.offsetHeight:0}
   function collapse(on){sec.hidden=on; cueOn.hidden=on; cueOff.hidden=!on;}
   function jump(e){
