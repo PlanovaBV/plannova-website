@@ -1,4 +1,4 @@
-/* PlanNova: bezoekersstatistiek zonder cookies + keuze voor bedrijfsherkenning.
+/* PlanNova: bezoekersstatistiek + cookiemelding (Accepteren = ook bedrijfsherkenning).
    Er worden geen cookies geplaatst. In de browser bewaren we alleen uw keuze
    ("plannova-toestemming") zodat we het niet opnieuw vragen. Zie /privacy/. */
 (function(){
@@ -32,9 +32,9 @@
   function toon(){
     if(document.getElementById('pn-tm')) return;
     var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
-    var d=document.createElement('div');d.className='pn-tm';d.id='pn-tm';d.setAttribute('role','dialog');d.setAttribute('aria-live','polite');d.setAttribute('aria-label','Privacykeuze');
-    d.innerHTML='<b>Mogen we zien vanuit welk bedrijf u kijkt?</b><p>We gebruiken geen cookies. Gaat u akkoord, dan zoeken we eenmalig op bij welke organisatie uw internetverbinding hoort. Alleen de bedrijfsnaam bewaren we, nooit uw internetadres. <a href="/privacy/">Meer in onze privacyverklaring</a>.</p>'+
-      '<div class="r"><button type="button" class="ja">Akkoord</button><button type="button" class="nee">Liever niet</button></div>';
+    var d=document.createElement('div');d.className='pn-tm';d.id='pn-tm';d.setAttribute('role','dialog');d.setAttribute('aria-live','polite');d.setAttribute('aria-label','Cookiemelding');
+    d.innerHTML='<b>Deze website gebruikt cookies</b><p>We gebruiken cookies en vergelijkbare technieken om de website goed te laten werken, het gebruik te analyseren en de website te verbeteren. Lees meer in onze <a href="/privacy/">privacyverklaring</a>.</p>'+
+      '<div class="r"><button type="button" class="ja">Accepteren</button><button type="button" class="nee">Weigeren</button></div>';
     document.body.appendChild(d);
     d.querySelector('.ja').onclick=function(){keuze='ja';zet('ja');d.remove();stuur(true)};
     d.querySelector('.nee').onclick=function(){keuze='nee';zet('nee');d.remove()};
