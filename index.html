@@ -618,7 +618,7 @@ footer .legal a:hover{color:var(--on-green)}
       <div class="lopend" id="lopend" hidden>
         <div class="lp-head">
           <div>
-            <p class="eyebrow">Lopende projecten</p>
+            <p class="eyebrow">Projecten</p>
             <h3>Waar we aan gewerkt hebben.</h3>
           </div>
           <div class="rc-ctrl" data-ctrl><button type="button" data-prev aria-label="Vorige projecten">←</button><button type="button" data-next aria-label="Volgende projecten">→</button></div>
@@ -1083,7 +1083,7 @@ document.querySelectorAll('.drop a').forEach(a=>a.addEventListener('click',()=>a
   fetch('/api/projecten').then(function(r){return r.ok?r.json():null}).catch(function(){return null}).then(function(d){
     var l=d&&d.projecten||[];
     vul(document.getElementById('projecten'), l.slice(0,5));
-    vul(document.getElementById('lopend'), l.filter(function(p){return p.status!=='opgeleverd'}));
+    vul(document.getElementById('lopend'), l);
   });
 })();
 </script>
