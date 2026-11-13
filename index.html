@@ -145,6 +145,21 @@ p{margin:0}
 @media (prefers-reduced-motion:reduce){.skip{display:none}.groei{height:auto}.stage{position:relative;height:auto}.stage .wrap{padding-block:64px}.cv-box{height:60vh}}
 
 /* Doors */
+/* Diensten */
+.services{padding-block:clamp(64px,8vw,104px);border-top:1px solid var(--line)}
+.svc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.svc{background:#fff;border-top:2px solid var(--green);padding:clamp(24px,3vw,36px);display:flex;flex-direction:column;gap:14px;min-width:0}
+.svc .num{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep)}
+.svc h3{font-size:clamp(24px,2.4vw,30px)}
+.svc p{color:var(--muted)}
+.svc ul{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:8px}
+.svc li{display:grid;grid-template-columns:18px 1fr;gap:10px;align-items:start;font-size:16px}
+.svc li::before{content:"";width:8px;height:8px;margin-top:9px;background:var(--gold);transform:rotate(45deg)}
+.svc .links{margin-top:auto;padding-top:12px;display:flex;flex-wrap:wrap;gap:10px 22px}
+.svc .links a{font-weight:600;text-decoration:none;display:inline-flex;gap:8px;border-bottom:1px solid var(--gold);padding-bottom:3px}
+.svc .links a:hover{color:var(--gold-deep)}
+.svc .links a.sub{font-weight:500;color:var(--muted);border-bottom-color:var(--line)}
+@media (max-width:860px){.svc-grid{grid-template-columns:1fr}}
 .doors{padding-block:clamp(64px,8vw,104px);border-top:1px solid var(--line)}
 .sec-head{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(20px,4vw,64px);align-items:end;margin-bottom:clamp(36px,5vw,56px)}
 .sec-head h2{font-size:clamp(32px,4vw,50px);margin-top:14px}
@@ -329,6 +344,7 @@ footer .legal a:hover{color:var(--on-green)}
   <div class="wrap">
     <a class="brand" href="#top" aria-label="PlanNova, naar boven"><img src="assets/logo-dark.png" alt="PlanNova BV Projectontwikkeling" width="900" height="193"></a>
     <nav class="nav" aria-label="Hoofdmenu">
+      <a href="#diensten">Diensten</a>
       <a href="#werkwijze">Werkwijze</a>
       <a href="#voor-wie">Voor wie</a>
       <a href="/projecten/">Projecten</a>
@@ -338,6 +354,7 @@ footer .legal a:hover{color:var(--on-green)}
     <details class="menu">
       <summary aria-label="Menu openen">Menu</summary>
       <div class="drop">
+        <a href="#diensten">Diensten</a>
         <a href="#werkwijze">Werkwijze</a>
         <a href="#voor-wie">Voor wie</a>
         <a href="/projecten/">Projecten</a>
@@ -360,7 +377,7 @@ footer .legal a:hover{color:var(--on-green)}
           <a class="btn primary" href="#werkwijze">Bekijk onze werkwijze <span class="arr" aria-hidden="true">→</span></a>
           <a class="btn ghost" href="#contact">Neem contact op</a>
         </div>
-        <p class="cue" id="cue-on">Scroll en zie hoe een kavel een project wordt <span aria-hidden="true">↓</span> <a href="#voor-wie" class="skip-link">of sla over</a></p>
+        <p class="cue" id="cue-on">Scroll en zie hoe een kavel een project wordt <span aria-hidden="true">↓</span> <a href="#diensten" class="skip-link">of sla over</a></p>
         <p class="cue" id="cue-off" hidden><a href="#groei" id="replay" class="replay-btn">Animatie bekijken <span aria-hidden="true">↻</span></a></p>
       </div>
       
@@ -385,6 +402,68 @@ footer .legal a:hover{color:var(--on-green)}
     </div>
   </section>
 
+
+  <section class="services" id="diensten">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow">Diensten</p>
+          <h2>Wat wij doen.</h2>
+        </div>
+        <p>PlanNova ontwikkelt en begeleidt vastgoedprojecten, faciliteert grondtransacties en levert onderzoek en advies. U kunt ons inschakelen voor het hele traject of voor één onderdeel.</p>
+      </div>
+      <div class="svc-grid">
+        <article class="svc">
+          <span class="num">01 · Ontwikkelen</span>
+          <h3>Projectontwikkeling</h3>
+          <p>Van locatie tot woningen. We zien de kansen van een plek, maken het plan, regelen de vergunning en brengen het project tot uitvoering, samen met eigenaren en partners.</p>
+          <ul>
+            <li>Locatie- en planontwikkeling</li>
+            <li>Ontwerp en omgevingsvergunning</li>
+            <li>Verkoop van de woningen</li>
+            <li>Bouw en oplevering</li>
+          </ul>
+          <div class="links"><a href="#werkwijze">Bekijk onze werkwijze <span aria-hidden="true">→</span></a></div>
+        </article>
+        <article class="svc">
+          <span class="num">02 · Begeleiden</span>
+          <h3>Projectbegeleiding</h3>
+          <p>Heeft u zelf een bouw- of vastgoedproject? Wij nemen de regie of versterken uw team, van de eerste plannen tot de oplevering.</p>
+          <ul>
+            <li>Projectmanagement en procesbegeleiding</li>
+            <li>Werkvoorbereiding en kostenraming</li>
+            <li>Bouwdirectie en kwaliteitsbewaking</li>
+            <li>Afstemming met gemeente, nutsbedrijven en omgeving</li>
+          </ul>
+          <div class="links"><a href="#contact">Bespreek uw project <span aria-hidden="true">→</span></a></div>
+        </article>
+        <article class="svc">
+          <span class="num">03 · Grondtransacties</span>
+          <h3>Grondtransacties faciliteren</h3>
+          <p>We brengen grondeigenaren, ontwikkelaars en kopers samen en zorgen dat de overdracht zorgvuldig verloopt, bijvoorbeeld met een ABC-constructie waarbij de grond maar één keer van eigenaar wisselt.</p>
+          <ul>
+            <li>Koop- en ontwikkelovereenkomsten</li>
+            <li>ABC-constructies</li>
+            <li>Afstemming tussen eigenaar, koper en ontwikkelaar</li>
+            <li>Begeleiding tot en met de notaris</li>
+          </ul>
+          <div class="links"><a href="#contact" data-rol="Grondeigenaar">Locatie voorleggen <span aria-hidden="true">→</span></a><a class="sub" href="#abc">Hoe werkt een ABC-constructie?</a></div>
+        </article>
+        <article class="svc">
+          <span class="num">04 · Onderzoek &amp; advies</span>
+          <h3>Onderzoek en advies</h3>
+          <p>Wilt u weten wat er op een locatie mogelijk is? We leveren onderzoek en advies als losse opdracht, ook als u het project daarna zelf uitvoert.</p>
+          <ul>
+            <li>Locatieonderzoek en toets aan het omgevingsplan</li>
+            <li>Haalbaarheidsstudies met kosten en opbrengsten</li>
+            <li>Varianten en scenario's doorgerekend</li>
+            <li>Advies over aanpak, planning en risico's</li>
+          </ul>
+          <div class="links"><a href="#contact">Advies aanvragen <span aria-hidden="true">→</span></a></div>
+        </article>
+      </div>
+    </div>
+  </section>
 
   <section class="doors" id="voor-wie">
     <div class="wrap">
@@ -824,7 +903,7 @@ document.querySelectorAll('.drop a').forEach(a=>a.addEventListener('click',()=>a
   }
 
 
-  var skipBtn=document.getElementById('skip'), doors=document.getElementById('voor-wie');
+  var skipBtn=document.getElementById('skip'), doors=document.getElementById('diensten');
   var cueOn=document.getElementById('cue-on'), cueOff=document.getElementById('cue-off');
   // Voorkeur voor de animatie (functionele opslag in de browser, geen tracking):
   //  leeg   = eerste bezoek: animatie tonen en onthouden dat hij gezien is
